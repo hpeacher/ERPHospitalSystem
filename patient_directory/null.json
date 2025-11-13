@@ -1,0 +1,26 @@
+{
+  "patientId": null,
+  "administrativeInfo": null,
+  "medicalInfo": null,
+  "visits": [
+    {
+      "id": "1",
+      "patientId": null,
+      "vitals": null,
+      "notes": "Admitted to ER | Reason: Chest pain",
+      "dischargeChecklist": null,
+      "invoice": {
+        "id": "0",
+        "cost": "0.0",
+        "patientId": null,
+        "insurance": null,
+        "finalized": "false"
+      },
+      "diagnosis": null,
+      "visitIdCounter": "1"
+    }
+  ],
+  "insurance": null,
+  "appointments": [
+  ]
+}

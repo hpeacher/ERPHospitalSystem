@@ -52,4 +52,6 @@ public class Invoice {
     public void setFinalized(boolean finalized) {
         this.finalized = finalized;
     }
+    public Invoice() {
+    }
 }

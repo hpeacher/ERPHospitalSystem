@@ -49,4 +49,7 @@ public class PatientAdministrativeInfo {
     public void setAddress(String address) {
         this.address = address;
     }
+    public PatientAdministrativeInfo() {
+        // required for JSON deserializer
+    }
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 interface IHospital {
     boolean patientDischarged(String patientId);
@@ -110,4 +111,25 @@ public class Hospital implements IHospital {
     public void removeNurse(Nurse nurse) {
         this.nurses.remove(nurse);
     }
+    private static void scheduleAppointment(Scanner sc, AppointmentScheduler scheduler) {
+        System.out.print("Enter patient ID: ");
+        String pid = sc.nextLine();
+
+        System.out.print("Enter doctor name: ");
+        String doctor = sc.nextLine();
+
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = sc.nextLine();
+
+        System.out.print("Enter time (HH:MM): ");
+        String time = sc.nextLine();
+
+        try {
+            Appointment ap = scheduler.scheduleAppointment(pid, doctor, date, time);
+            System.out.println("Appointment scheduled! ID: " + ap.getAppointmentId());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 }

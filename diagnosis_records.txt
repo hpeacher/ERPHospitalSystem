@@ -1,0 +1,17 @@
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-12 13:53:19
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-12 13:54:26
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-12 16:51:50
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 12:59:16
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:02:34
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:03:30
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:06:42
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:15:25
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:17:21
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:21:31
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:22:04
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:30:13
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:31:48
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:37:10
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:38:07
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 13:41:49
+PatientID:1|1|Chest pain due to hypertension|Lisinopril 10mg daily|2025-11-13 16:14:39

@@ -66,4 +66,6 @@ public class VisitRecord {
     public void setDiagnosis(Diagnosis diagnosis) {
         this.diagnosis = diagnosis;
     }
+    public VisitRecord() {
+    }
 }

@@ -35,32 +35,44 @@ public class HospitalSystem {
         HospitalSystem system = HospitalSystem.getInstance();
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);
 
-        // Schedule Appointment demo
-        // Hardcoded patient data
-        patients.put("P123", "John Doe");
-        patients.put("P456", "Jane Smith");
-        patients.put("P789", "Michael Johnson");
-        patients.put("P321", "Emily Davis");
-        patients.put("P654", "David Wilson");
+        
+        PatientFileManager fileManager = new PatientFileManager();
+        AppointmentScheduler scheduler = new AppointmentScheduler(fileManager);
+
         Scanner sc = new Scanner(System.in);
+        System.out.println("\n Schedule Appointment Demo");
+
         System.out.print("Enter Patient ID: ");
-        String id = sc.nextLine();
-        if (!patients.containsKey(id)) {
-            System.out.println("Patient not found. Please register.");
-            sc.close();
-            return;
+        String pid = sc.nextLine();
+
+        try {
+            // Load real patient record from patient_directory/PXXX.json
+            PatientRecord record = fileManager.getPatientRecord(pid);
+
+            if (record == null) {
+                System.out.println("Patient not found in system. Please admit first.");
+            } else {
+                //System.out.println("Patient found: " + record.getAdministrativeInfo().getName());
+
+                System.out.print("Enter doctor name: ");
+                String doctorName = sc.nextLine();
+
+                System.out.print("Enter date (YYYY-MM-DD): ");
+                String date = sc.nextLine();
+
+                System.out.print("Enter time (HH:MM): ");
+                String time = sc.nextLine();
+
+                Appointment appt = scheduler.scheduleAppointment(pid, doctorName, date, time);
+
+                System.out.println("Appointment booked!");
+                System.out.println("Appointment ID: " + appt.getAppointmentId());
+                System.out.println("Doctor: " + appt.getDoctorName());
+                System.out.println("Date: " + appt.getDate() + " at " + appt.getTime());
+            }
+        } catch (Exception e) {
+            System.out.println("Error scheduling appointment: " + e.getMessage());
         }
-        System.out.println("Patient found: " + patients.get(id));
-        System.out.println("Available doctors: " + doctors);
-        System.out.print("Select doctor: ");
-        String doc = sc.nextLine();
-        if (!doctors.contains(doc)) {
-            System.out.println("Doctor not available.");
-        } else {
-            String confirmation = "A" + (int) (Math.random() * 10000);
-            System.out.println("Appointment booked with " + doc + " (Confirmation #: " + confirmation + ")");
-        }
-        sc.close();
 
         // Tirmidi Mohamed — Admit Patient demo
         HospitalController ctrl = new HospitalController();

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class PatientRecord {
     private String patientId;
@@ -6,7 +7,7 @@ public class PatientRecord {
     private PatientMedicalInfo medicalInfo;
     private ArrayList<VisitRecord> visits;
     private String insurance;
-
+    private List<Appointment> appointments = new ArrayList<>();
     // Constructor
     public PatientRecord(String patientId, PatientAdministrativeInfo administrativeInfo,
             PatientMedicalInfo medicalInfo, String insurance) {
@@ -19,6 +20,7 @@ public class PatientRecord {
 
     public PatientRecord() {
         this.visits = new ArrayList<VisitRecord>();
+        this.appointments = new ArrayList<>();
     }
 
     // Getters
@@ -61,5 +63,14 @@ public class PatientRecord {
 
     public void setInsurance(String insurance) {
         this.insurance = insurance;
+    }
+    
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void addAppointment(Appointment appt) {
+        this.appointments.add(appt);
     }
 }

@@ -51,4 +51,6 @@ public class PatientMedicalInfo {
     public void setWeight(String weight) {
         this.weight = weight;
     }
+    public PatientMedicalInfo() {
+    }
 }
