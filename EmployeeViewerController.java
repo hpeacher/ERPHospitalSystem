@@ -160,7 +160,6 @@ public class EmployeeViewerController {
         System.out.println("-------------------------------------------------------");
     }
 
-    // Programmatic methods for testing without user input
     public ArrayList<Employee> requestViewAllEmployees(boolean silent) {
         return employeeViewer.getAllEmployees();
     }

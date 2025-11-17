@@ -13,7 +13,6 @@ public class Employee {
         this.contactInfo = contactInfo;
     }
 
-    // Default constructor for serialization
     public Employee() {
     }
 

@@ -13,12 +13,10 @@ public class EmployeeViewer implements IEmployeeViewer {
     public ArrayList<Employee> getAllEmployees() {
         ArrayList<Employee> allEmployees = new ArrayList<Employee>();
         
-        // Add all doctors
         for (Doctor doctor : doctorManager.getAllDoctors()) {
             allEmployees.add(doctor);
         }
         
-        // Add all nurses
         for (Nurse nurse : hospital.getNurses()) {
             Employee nurseEmployee = new Employee(
                 nurse.getNurseId(),
@@ -35,13 +33,11 @@ public class EmployeeViewer implements IEmployeeViewer {
 
     @Override
     public Employee getEmployeeById(String id) {
-        // Search in doctors
         Doctor doctor = doctorManager.getDoctorById(id);
         if (doctor != null) {
             return doctor;
         }
         
-        // Search in nurses
         Nurse nurse = hospital.getNurseById(id);
         if (nurse != null) {
             return new Employee(
@@ -76,10 +72,8 @@ public class EmployeeViewer implements IEmployeeViewer {
                 filteredEmployees.add(nurseEmployee);
             }
         } else if (role.equalsIgnoreCase("Receptionist")) {
-            // Placeholder for future receptionist implementation
             System.out.println("Receptionist role not yet implemented.");
         } else if (role.equalsIgnoreCase("Billing Officer")) {
-            // Placeholder for future billing officer implementation
             System.out.println("Billing Officer role not yet implemented.");
         }
         
@@ -91,7 +85,6 @@ public class EmployeeViewer implements IEmployeeViewer {
         ArrayList<Employee> matchingEmployees = new ArrayList<Employee>();
         String searchTerm = name.toLowerCase();
         
-        // Search in all employees
         for (Employee employee : getAllEmployees()) {
             if (employee.getName().toLowerCase().contains(searchTerm)) {
                 matchingEmployees.add(employee);

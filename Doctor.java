@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 class Doctor extends Employee {
-    private String doctorId;  // Changed to String for consistency
+    private String doctorId;
     private String specialty;
     private ArrayList<String> assignedPatients;
 
@@ -12,7 +12,6 @@ class Doctor extends Employee {
         this.assignedPatients = new ArrayList<String>();
     }
 
-    // Legacy constructor for backward compatibility
     public Doctor(int doctorId, String name, String specialty) {
         super(String.valueOf(doctorId), name, "Doctor", "General", "N/A");
         this.doctorId = String.valueOf(doctorId);
@@ -48,7 +47,6 @@ class Doctor extends Employee {
         service.saveDiagnosis(patient.getPatientId(), description, prescription);
     }
 
-    // Methods for managing assigned patients
     public void assignPatient(String patientId) {
         if (!assignedPatients.contains(patientId)) {
             assignedPatients.add(patientId);

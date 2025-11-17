@@ -113,7 +113,6 @@ public class DoctorManagerController {
         System.out.println("-------------------------------------------------------");
     }
 
-    // Programmatic methods for testing without user input
     public boolean requestAddDoctor(String id, String name, String specialty, String department, String contact) {
         Doctor newDoctor = new Doctor(id, name, specialty, department, contact);
         return doctorManager.addDoctor(newDoctor);

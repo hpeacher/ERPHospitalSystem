@@ -9,7 +9,6 @@ public class DoctorManager implements IDoctorManager {
 
     @Override
     public boolean addDoctor(Doctor doctor) {
-        // Check if doctor ID already exists
         if (getDoctorById(doctor.getDoctorId()) != null) {
             System.out.println("Error: Doctor ID " + doctor.getDoctorId() + " already exists.");
             return false;
@@ -29,7 +28,6 @@ public class DoctorManager implements IDoctorManager {
             return false;
         }
 
-        // Check if doctor has active patients
         if (doctor.hasActivePatients()) {
             System.out.println("Error: Cannot remove doctor with active patients. " +
                              "Doctor " + doctor.getName() + " has " + 

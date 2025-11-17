@@ -41,8 +41,9 @@ public class HospitalSystem {
         HospitalSystem system = HospitalSystem.getInstance();
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);
 
-        // Schedule Appointment demo
+        // Schedule Appointment demo - COMMENTED OUT FOR ITERATION 2 TESTING
         // Hardcoded patient data
+        /*
         patients.put("P123", "John Doe");
         patients.put("P456", "Jane Smith");
         patients.put("P789", "Michael Johnson");
@@ -67,6 +68,7 @@ public class HospitalSystem {
             System.out.println("Appointment booked with " + doc + " (Confirmation #: " + confirmation + ")");
         }
         sc.close();
+        */
 
         // Tirmidi Mohamed — Admit Patient demo
         HospitalController ctrl = new HospitalController();
@@ -103,61 +105,46 @@ public class HospitalSystem {
         // Discharge demo
         system.dischargeManager.initiateDischarge("P001");
 
-        // ========================================
-        // TIRMIDI'S ITERATION 2 USE CASES DEMO
-        // ========================================
         System.out.println("\n\n========================================");
         System.out.println("ITERATION 2 - TIRMIDI'S USE CASES DEMO");
         System.out.println("========================================\n");
 
-        // Use Case 1: manageDoctors
         System.out.println("=== USE CASE 1: Manage Doctors ===\n");
         
         DoctorManagerController doctorController = new DoctorManagerController(system.getDoctorManager());
         
-        // View all initial doctors
         System.out.println("--- Viewing all initial doctors ---");
         doctorController.requestViewAllDoctors();
         
-        // Add a new doctor
         System.out.println("\n--- Adding a new doctor ---");
         doctorController.requestAddDoctor("D004", "Dr. Martinez", "Orthopedics", "Orthopedics", "555-0004");
         
-        // Try to add duplicate doctor (should fail)
         System.out.println("\n--- Attempting to add duplicate doctor ---");
         doctorController.requestAddDoctor("D004", "Dr. Duplicate", "General", "General", "555-9999");
         
-        // View all doctors after addition
         System.out.println("\n--- Viewing all doctors after addition ---");
         doctorController.requestViewAllDoctors();
         
-        // Try to remove a doctor without patients
         System.out.println("\n--- Removing doctor without patients ---");
         doctorController.requestRemoveDoctor("D004");
         
-        // Assign a patient to a doctor
         Doctor drSmith = system.getDoctorManager().getDoctorById("D001");
         drSmith.assignPatient("P001");
         System.out.println("\n--- Assigned patient P001 to Dr. Smith ---");
         
-        // Try to remove a doctor with active patients (should fail)
         System.out.println("\n--- Attempting to remove doctor with active patients ---");
         doctorController.requestRemoveDoctor("D001");
         
-        // View final doctor list
         System.out.println("\n--- Final doctor list ---");
         doctorController.requestViewAllDoctors();
 
-        // Use Case 2: viewEmployees
         System.out.println("\n\n=== USE CASE 2: View Employees ===\n");
         
         EmployeeViewerController employeeController = new EmployeeViewerController(system.getEmployeeViewer());
         
-        // View all employees
         System.out.println("--- Viewing all employees ---");
         employeeController.requestViewAllEmployees();
         
-        // Search by role - Doctors
         System.out.println("\n--- Searching employees by role: Doctor ---");
         ArrayList<Employee> doctorEmployees = employeeController.requestSearchByRole("Doctor");
         System.out.println("Found " + doctorEmployees.size() + " doctors");
@@ -165,7 +152,6 @@ public class HospitalSystem {
             System.out.println(emp.toString());
         }
         
-        // Search by role - Nurses
         System.out.println("\n--- Searching employees by role: Nurse ---");
         ArrayList<Employee> nurseEmployees = employeeController.requestSearchByRole("Nurse");
         System.out.println("Found " + nurseEmployees.size() + " nurses");
@@ -173,7 +159,6 @@ public class HospitalSystem {
             System.out.println(emp.toString());
         }
         
-        // Search by ID
         System.out.println("\n--- Searching employee by ID: D001 ---");
         Employee foundEmployee = employeeController.requestSearchById("D001");
         if (foundEmployee != null) {
@@ -182,7 +167,6 @@ public class HospitalSystem {
             System.out.println("Employee not found");
         }
         
-        // Search by name
         System.out.println("\n--- Searching employees by name: 'Smith' ---");
         ArrayList<Employee> nameMatches = employeeController.requestSearchByName("Smith");
         System.out.println("Found " + nameMatches.size() + " employee(s) matching 'Smith'");
@@ -190,7 +174,6 @@ public class HospitalSystem {
             System.out.println(emp.toString());
         }
         
-        // Search by name (partial match)
         System.out.println("\n--- Searching employees by name: 'Dr' (partial match) ---");
         ArrayList<Employee> partialMatches = employeeController.requestSearchByName("Dr");
         System.out.println("Found " + partialMatches.size() + " employee(s) matching 'Dr'");
