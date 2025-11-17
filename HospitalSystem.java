@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,8 @@ public class HospitalSystem {
     private static HospitalSystem instance;
     private Hospital hospital;
     private DischargeManager dischargeManager;
+    private DoctorManager doctorManager;
+    private EmployeeViewer employeeViewer;
     private static int patientIndexCounter = 0;
     final static int DEFAULT_CAPACITY = 100;
 
@@ -20,7 +23,10 @@ public class HospitalSystem {
         this.hospital = new Hospital(capacity);
         this.dischargeManager = DischargeManager.getInstance();
         this.dischargeManager.setHospitalSystem(this);
+        this.doctorManager = new DoctorManager();
+        this.employeeViewer = new EmployeeViewer(hospital, doctorManager);
         addStaff();
+        addInitialDoctors();
     }
 
     public static synchronized HospitalSystem getInstance() {
@@ -96,6 +102,105 @@ public class HospitalSystem {
 
         // Discharge demo
         system.dischargeManager.initiateDischarge("P001");
+
+        // ========================================
+        // TIRMIDI'S ITERATION 2 USE CASES DEMO
+        // ========================================
+        System.out.println("\n\n========================================");
+        System.out.println("ITERATION 2 - TIRMIDI'S USE CASES DEMO");
+        System.out.println("========================================\n");
+
+        // Use Case 1: manageDoctors
+        System.out.println("=== USE CASE 1: Manage Doctors ===\n");
+        
+        DoctorManagerController doctorController = new DoctorManagerController(system.getDoctorManager());
+        
+        // View all initial doctors
+        System.out.println("--- Viewing all initial doctors ---");
+        doctorController.requestViewAllDoctors();
+        
+        // Add a new doctor
+        System.out.println("\n--- Adding a new doctor ---");
+        doctorController.requestAddDoctor("D004", "Dr. Martinez", "Orthopedics", "Orthopedics", "555-0004");
+        
+        // Try to add duplicate doctor (should fail)
+        System.out.println("\n--- Attempting to add duplicate doctor ---");
+        doctorController.requestAddDoctor("D004", "Dr. Duplicate", "General", "General", "555-9999");
+        
+        // View all doctors after addition
+        System.out.println("\n--- Viewing all doctors after addition ---");
+        doctorController.requestViewAllDoctors();
+        
+        // Try to remove a doctor without patients
+        System.out.println("\n--- Removing doctor without patients ---");
+        doctorController.requestRemoveDoctor("D004");
+        
+        // Assign a patient to a doctor
+        Doctor drSmith = system.getDoctorManager().getDoctorById("D001");
+        drSmith.assignPatient("P001");
+        System.out.println("\n--- Assigned patient P001 to Dr. Smith ---");
+        
+        // Try to remove a doctor with active patients (should fail)
+        System.out.println("\n--- Attempting to remove doctor with active patients ---");
+        doctorController.requestRemoveDoctor("D001");
+        
+        // View final doctor list
+        System.out.println("\n--- Final doctor list ---");
+        doctorController.requestViewAllDoctors();
+
+        // Use Case 2: viewEmployees
+        System.out.println("\n\n=== USE CASE 2: View Employees ===\n");
+        
+        EmployeeViewerController employeeController = new EmployeeViewerController(system.getEmployeeViewer());
+        
+        // View all employees
+        System.out.println("--- Viewing all employees ---");
+        employeeController.requestViewAllEmployees();
+        
+        // Search by role - Doctors
+        System.out.println("\n--- Searching employees by role: Doctor ---");
+        ArrayList<Employee> doctorEmployees = employeeController.requestSearchByRole("Doctor");
+        System.out.println("Found " + doctorEmployees.size() + " doctors");
+        for (Employee emp : doctorEmployees) {
+            System.out.println(emp.toString());
+        }
+        
+        // Search by role - Nurses
+        System.out.println("\n--- Searching employees by role: Nurse ---");
+        ArrayList<Employee> nurseEmployees = employeeController.requestSearchByRole("Nurse");
+        System.out.println("Found " + nurseEmployees.size() + " nurses");
+        for (Employee emp : nurseEmployees) {
+            System.out.println(emp.toString());
+        }
+        
+        // Search by ID
+        System.out.println("\n--- Searching employee by ID: D001 ---");
+        Employee foundEmployee = employeeController.requestSearchById("D001");
+        if (foundEmployee != null) {
+            System.out.println("Found: " + foundEmployee.toString());
+        } else {
+            System.out.println("Employee not found");
+        }
+        
+        // Search by name
+        System.out.println("\n--- Searching employees by name: 'Smith' ---");
+        ArrayList<Employee> nameMatches = employeeController.requestSearchByName("Smith");
+        System.out.println("Found " + nameMatches.size() + " employee(s) matching 'Smith'");
+        for (Employee emp : nameMatches) {
+            System.out.println(emp.toString());
+        }
+        
+        // Search by name (partial match)
+        System.out.println("\n--- Searching employees by name: 'Dr' (partial match) ---");
+        ArrayList<Employee> partialMatches = employeeController.requestSearchByName("Dr");
+        System.out.println("Found " + partialMatches.size() + " employee(s) matching 'Dr'");
+        for (Employee emp : partialMatches) {
+            System.out.println(emp.toString());
+        }
+
+        System.out.println("\n========================================");
+        System.out.println("END OF ITERATION 2 DEMO");
+        System.out.println("========================================");
     }
 
     private void addStaff() {
@@ -108,7 +213,22 @@ public class HospitalSystem {
         return hospital;
     }
 
+    public DoctorManager getDoctorManager() {
+        return doctorManager;
+    }
+
+    public EmployeeViewer getEmployeeViewer() {
+        return employeeViewer;
+    }
+
     public static synchronized int getNextPatientIndex() {
         return ++patientIndexCounter;
+    }
+
+    private void addInitialDoctors() {
+        // Add some initial doctors to the system
+        doctorManager.addDoctor(new Doctor("D001", "Dr. Smith", "Cardiology", "Cardiology", "555-0001"));
+        doctorManager.addDoctor(new Doctor("D002", "Dr. Johnson", "Neurology", "Neurology", "555-0002"));
+        doctorManager.addDoctor(new Doctor("D003", "Dr. Williams", "Pediatrics", "Pediatrics", "555-0003"));
     }
 }
