@@ -7,9 +7,11 @@ import com.hospital.service.DischargeManager;
 
 public class DischargePatientCommand implements ICommand {
     private final DischargeManager ctrl;
+    private final Scanner scanner;
 
-    public DischargePatientCommand(DischargeManager ctrl) {
+    public DischargePatientCommand(DischargeManager ctrl, Scanner scanner) {
         this.ctrl = ctrl;
+        this.scanner = scanner;
     }
 
     @Override
@@ -19,13 +21,9 @@ public class DischargePatientCommand implements ICommand {
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter patient ID to discharge: ");
         String patientId = scanner.nextLine();
 
         ctrl.initiateDischarge(patientId);
-        System.out.println("Patient with ID " + patientId + " has been discharged.");
-
-        scanner.close();
     }
 }

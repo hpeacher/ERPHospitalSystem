@@ -1,8 +1,8 @@
 package com.hospital.repository.impl;
 
+import com.hospital.model.Diagnosis;
 import com.hospital.repository.IDiagnosisRepository;
 import com.hospital.repository.IFileStorage;
-import com.hospital.model.Diagnosis;
 
 public class DiagnosisRepository implements IDiagnosisRepository {
     private IFileStorage fileStorage;

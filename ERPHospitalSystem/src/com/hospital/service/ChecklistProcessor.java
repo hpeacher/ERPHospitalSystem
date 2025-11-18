@@ -1,14 +1,15 @@
 package com.hospital.service;
 
+import java.util.function.Consumer;
+
 import com.hospital.model.DischargeChecklist;
 import com.hospital.model.VisitRecord;
 
 public class ChecklistProcessor {
+    private final Consumer<VisitRecord> onChecklistCompleted;
 
-    private DischargeManager dischargeManager;
-
-    public ChecklistProcessor() {
-        dischargeManager = DischargeManager.getInstance();
+    public ChecklistProcessor(Consumer<VisitRecord> onChecklistCompleted) {
+        this.onChecklistCompleted = onChecklistCompleted;
     }
 
     public void initiateChecklist(VisitRecord visitRecord) {
@@ -23,7 +24,7 @@ public class ChecklistProcessor {
         if (checklist != null) {
             checklist.setNotesCompleted(true);
             checklist.setSignature(signature);
-            dischargeManager.checklistCompleted(visitRecord);
+            onChecklistCompleted.accept(visitRecord);
             return true;
         }
         return false;

@@ -8,9 +8,11 @@ import com.hospital.model.AdmitDTO;
 
 public class AdmitPatientCommand implements ICommand {
     private final IHospitalController ctrl;
+    private final Scanner scanner;
 
-    public AdmitPatientCommand(IHospitalController ctrl) {
+    public AdmitPatientCommand(IHospitalController ctrl, Scanner scanner) {
         this.ctrl = ctrl;
+        this.scanner = scanner;
     }
 
     @Override
@@ -20,7 +22,6 @@ public class AdmitPatientCommand implements ICommand {
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
         AdmitDTO dto = new AdmitDTO();
 
         System.out.print("Enter patient ID: ");
@@ -46,7 +47,5 @@ public class AdmitPatientCommand implements ICommand {
 
         String visitId = ctrl.admitPatient(dto);
         System.out.println("Patient admitted with visit ID: " + visitId);
-
-        scanner.close();
     }
 }

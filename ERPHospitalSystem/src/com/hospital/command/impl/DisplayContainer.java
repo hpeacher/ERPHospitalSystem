@@ -23,11 +23,11 @@ public class DisplayContainer {
     public void showAvailableCommands() {
         System.out.println("Available commands:");
         for (String token : commandMap.keySet()) {
-            System.out.println("- " + token + " [optional ID]");
+            System.out.println("- " + token);
         }
     }
 
     public void showDefaultScreen() {
-        System.out.println("Type a command to begin. \nIf you need help type \"help\".\n");
+        System.out.println("Type a command to begin. \nIf you need help type \"help\".");
     }
 }
