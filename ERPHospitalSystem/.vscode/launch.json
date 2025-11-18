@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "HospitalSystem",
+      "request": "launch",
+      "mainClass": "com.hospital.service.HospitalSystem",
+      "projectName": "ERPHospitalSystem_3db8a623"
+    },
+    {
+      "type": "php",
+      "request": "launch",
+      "name": "Run using local PHP Interpreter",
+      "program": "${file}",
+      "runtimeExecutable": "C:\\xampp\\php\\php.exe"
+    }
+  ]
+}
