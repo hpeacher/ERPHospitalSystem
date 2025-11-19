@@ -7,7 +7,7 @@ public class PatientRecord {
     private PatientMedicalInfo medicalInfo;
     private ArrayList<VisitRecord> visits;
     private String insurance;
-    private List<Appointment> appointments = new ArrayList<>();
+    private ArrayList<Appointment> appointments;
     // Constructor
     public PatientRecord(String patientId, PatientAdministrativeInfo administrativeInfo,
             PatientMedicalInfo medicalInfo, String insurance) {
@@ -16,6 +16,7 @@ public class PatientRecord {
         this.medicalInfo = medicalInfo;
         this.visits = new ArrayList<VisitRecord>();
         this.insurance = insurance;
+        this.appointments = new ArrayList<>();
     }
 
     public PatientRecord() {

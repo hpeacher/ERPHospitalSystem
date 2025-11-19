@@ -1,27 +1,20 @@
 {
   "patientId": "P001",
-  "administrativeInfo": {},
-  "medicalInfo": {},
+  "administrativeInfo": {
+    "patientId": "P001",
+    "name": "Jane Doe",
+    "dateOfBirth": "2000-01-01",
+    "phoneNumber": "515-555-1212",
+    "address": "123 Main St"
+  },
+  "medicalInfo": {
+    "patientId": "P001",
+    "gender": "",
+    "bloodType": "",
+    "height": "",
+    "weight": ""
+  },
   "visits": [
-    null,
-    {
-      "id": 2,
-      "patientId": "P001",
-      "vitals": "Sample Vitals Data for Patient ID: P001",
-      "notes": "Notes for Patient P001",
-      "dischargeChecklist": {
-        "finalized": false,
-        "notesCompleted": true,
-        "signature": "Bob"
-      },
-      "invoice": {
-        "id": 0,
-        "cost": 1000.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": true
-      }
-    },
     {
       "id": 1,
       "patientId": "P001",
@@ -32,174 +25,6 @@
         "patientId": "P001",
         "insurance": "Default insurance",
         "finalized": false
-      }
-    },
-    {
-      "id": 2,
-      "patientId": "P001",
-      "vitals": "Sample Vitals Data for Patient ID: P001",
-      "notes": "Notes for Patient P001",
-      "dischargeChecklist": {
-        "finalized": false,
-        "notesCompleted": true,
-        "signature": "Bob"
-      },
-      "invoice": {
-        "id": 0,
-        "cost": 1000.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": true
-      }
-    },
-    {
-      "id": 1,
-      "patientId": "P001",
-      "notes": "Admitted to ER | Reason: Chest pain",
-      "invoice": {
-        "id": 0,
-        "cost": 0.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": false
-      }
-    },
-    {
-      "id": 2,
-      "patientId": "P001",
-      "vitals": "Sample Vitals Data for Patient ID: P001",
-      "notes": "Notes for Patient P001",
-      "dischargeChecklist": {
-        "finalized": false,
-        "notesCompleted": true,
-        "signature": "Bob"
-      },
-      "invoice": {
-        "id": 0,
-        "cost": 1000.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": true
-      }
-    },
-    {
-      "id": 1,
-      "patientId": "P001",
-      "notes": "Admitted to ER | Reason: Chest pain",
-      "invoice": {
-        "id": 0,
-        "cost": 0.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": false
-      }
-    },
-    {
-      "id": 2,
-      "patientId": "P001",
-      "vitals": "Sample Vitals Data for Patient ID: P001",
-      "notes": "Notes for Patient P001",
-      "dischargeChecklist": {
-        "finalized": false,
-        "notesCompleted": true,
-        "signature": "Bob"
-      },
-      "invoice": {
-        "id": 0,
-        "cost": 1000.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": true
-      }
-    },
-    {
-      "id": 1,
-      "patientId": "P001",
-      "notes": "Admitted to ER | Reason: Chest pain",
-      "invoice": {
-        "id": 0,
-        "cost": 0.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": false
-      }
-    },
-    {
-      "id": 2,
-      "patientId": "P001",
-      "vitals": "Sample Vitals Data for Patient ID: P001",
-      "notes": "Notes for Patient P001",
-      "dischargeChecklist": {
-        "finalized": false,
-        "notesCompleted": true,
-        "signature": "Bob"
-      },
-      "invoice": {
-        "id": 0,
-        "cost": 1000.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": true
-      }
-    },
-    {
-      "id": 1,
-      "patientId": "P001",
-      "notes": "Admitted to ER | Reason: Chest pain",
-      "invoice": {
-        "id": 0,
-        "cost": 0.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": false
-      }
-    },
-    {
-      "id": 2,
-      "patientId": "P001",
-      "vitals": "Sample Vitals Data for Patient ID: P001",
-      "notes": "Notes for Patient P001",
-      "dischargeChecklist": {
-        "finalized": false,
-        "notesCompleted": true,
-        "signature": "Bob"
-      },
-      "invoice": {
-        "id": 0,
-        "cost": 1000.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": true
-      }
-    },
-    {
-      "id": 1,
-      "patientId": "P001",
-      "notes": "Admitted to ER | Reason: Chest pain",
-      "invoice": {
-        "id": 0,
-        "cost": 0.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": false
-      }
-    },
-    {
-      "id": 2,
-      "patientId": "P001",
-      "vitals": "Sample Vitals Data for Patient ID: P001",
-      "notes": "Notes for Patient P001",
-      "dischargeChecklist": {
-        "finalized": false,
-        "notesCompleted": true,
-        "signature": "Bob"
-      },
-      "invoice": {
-        "id": 0,
-        "cost": 1000.0,
-        "patientId": "P001",
-        "insurance": "Default insurance",
-        "finalized": true
       }
     },
     {
@@ -268,30 +93,9 @@
     {
       "appointmentId": 1,
       "patientId": "P001",
-      "doctorName": "Dr. Smith",
-      "date": "2",
-      "time": "2"
-    },
-    {
-      "appointmentId": 2,
-      "patientId": "P001",
       "doctorName": "Dr.Smith",
       "date": "1",
       "time": "1"
-    },
-    {
-      "appointmentId": 1,
-      "patientId": "P001",
-      "doctorName": "Dr.Smith",
-      "date": "2",
-      "time": "2"
-    },
-    {
-      "appointmentId": 4,
-      "patientId": "P001",
-      "doctorName": "Dr. ",
-      "date": "s",
-      "time": "s"
     }
   ]
 }
