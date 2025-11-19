@@ -64,4 +64,31 @@ public class PatientRecord {
     public void setInsurance(String insurance) {
         this.insurance = insurance;
     }
+    public void deleteVisitRecord(){
+        this.visits = new ArrayList<>();
+    }
+
+    public void printVisitHistory() {
+        if (visits.isEmpty()) {
+            System.out.println("No visits.");
+            return;
+        }
+
+        for (int i = 0; i < visits.size(); i++) {
+            System.out.println((i + 1) + ": " + visits.get(i));
+        }
+    }
+
+     public boolean deleteVisit(int index) {
+        if (index < 1 || index > visits.size()) return false;
+        visits.remove(index - 1);
+        return true;
+    }
+
+    public void deleteLastFiveVisits() {
+        int count = Math.min(5, visits.size());
+        for (int i = 0; i < count; i++) {
+            visits.remove(visits.size() - 1);
+        }
+
 }
