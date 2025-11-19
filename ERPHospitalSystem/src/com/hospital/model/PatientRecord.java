@@ -1,6 +1,7 @@
 package com.hospital.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PatientRecord {
     private String patientId;
@@ -64,6 +65,12 @@ public class PatientRecord {
     public void setInsurance(String insurance) {
         this.insurance = insurance;
     }
+    public List<VisitRecord> getVisitHistory() {
+        return this.visits;
+    }
+    public void setVisits(ArrayList<VisitRecord> visits) {
+        this.visits = visits;
+    }
     public void deleteVisitRecord(){
         this.visits = new ArrayList<>();
     }
@@ -90,5 +97,5 @@ public class PatientRecord {
         for (int i = 0; i < count; i++) {
             visits.remove(visits.size() - 1);
         }
-
+    }
 }
