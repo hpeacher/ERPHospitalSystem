@@ -29,8 +29,6 @@ public class EmployeeManager implements IEmployeeManager {
 
     @Override
     public boolean removeEmployee(String employeeId) {
-        // Place for rule: prevent deletion if assigned to active shift/patient.
-        // For now assume allowed:
         return repo.deleteEmployee(employeeId);
     }
 
