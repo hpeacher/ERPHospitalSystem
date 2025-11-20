@@ -8,10 +8,11 @@ public class VisitRecord {
     private DischargeChecklist dischargeChecklist;
     private Invoice invoice;
     private Diagnosis diagnosis;
+    private String date;
 
     private static int visitIdCounter = 0;
 
-    public VisitRecord(String patientId) {
+    public VisitRecord(String patientId, String date) {
         this.id = ++visitIdCounter;
         this.patientId = patientId;
         this.vitals = null;
@@ -19,6 +20,7 @@ public class VisitRecord {
         this.dischargeChecklist = null;
         this.invoice = null;
         this.diagnosis = null;
+        this.date = date;
     }
 
     public int getId() {
@@ -67,5 +69,11 @@ public class VisitRecord {
 
     public void setDiagnosis(Diagnosis diagnosis) {
         this.diagnosis = diagnosis;
+    }
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -116,7 +116,7 @@ public class DeletePatientRecordCommand implements ICommand{
                break;
           
            case "3":
-               record.deleteMostRecentVisit();
+               
                System.out.println("Most recent visit deleted.");
                break;
           
