@@ -4,6 +4,8 @@ import java.util.Scanner;
 import com.hospital.command.NurseAssignmentStrategy;
 import com.hospital.command.impl.*;
 import com.hospital.model.*;
+import com.hospital.repository.IInvoiceFileManager;
+import com.hospital.repository.impl.InvoiceFileManager;
 import com.hospital.repository.impl.PatientFileManager;
 
 public class HospitalSystem {
@@ -34,6 +36,7 @@ public class HospitalSystem {
         // Initialize the Hospital System
         HospitalSystem system = HospitalSystem.getInstance();
         PatientFileManager patientFileManager = new PatientFileManager();
+        IInvoiceFileManager invoiceFileManager = new InvoiceFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
         AppointmentScheduler appointmentScheduler = new AppointmentScheduler(patientFileManager);
         system.dischargeManager = new DischargeManager(system.hospital, billingProcessor, patientFileManager);
@@ -60,6 +63,7 @@ public class HospitalSystem {
 
         display.registerCommand(new ManageDoctorsCommand(system.doctorManager, sc));
         display.registerCommand(new ViewEmployeesCommand(system.employeeViewer, sc));
+        display.registerCommand(new ProcessInvoiceCommand(billingProcessor, sc, invoiceFileManager));
 
 
         /*
@@ -102,18 +106,6 @@ public class HospitalSystem {
         // }
         // sc.close();
 
-        // Tirmidi Mohamed — Admit Patient demo
-        // AdmitDTO dto = new AdmitDTO();
-        // dto.patientId = "P001";
-        // dto.name = "Jane Doe";
-        // dto.dob = "2000-01-01";
-        // dto.phone = "515-555-1212";
-        // dto.address = "123 Main St";
-        // dto.department = "ER";
-        // dto.reason = "Chest pain";
-        // String visitId = hospitalController.admitPatient(dto);
-        // System.out.println("Admit complete. Visit ID = " + visitId);
-
         // IFileStorage storage = new FileStorage("diagnosis_records.txt");
         // IDiagnosisRepository repo = new DiagnosisRepository(storage);
         // IDiagnosisService service = new DiagnosisService(repo);
@@ -139,7 +131,7 @@ public class HospitalSystem {
         hospital.addNurse(new Nurse("N001", "Alice", hospital));
         hospital.addNurse(new Nurse("N002", "Bob", hospital));
         hospital.addNurse(new Nurse("N003", "Charlie", hospital));
-        
+
         doctorManager.addDoctor(new Doctor("D001", "Dr. Smith", "Cardiology", "Cardiology", "555-1001"));
         doctorManager.addDoctor(new Doctor("D002", "Dr. Johnson", "Pediatrics", "Pediatrics", "555-1002"));
         doctorManager.addDoctor(new Doctor("D003", "Dr. Williams", "Neurology", "Neurology", "555-1003"));
