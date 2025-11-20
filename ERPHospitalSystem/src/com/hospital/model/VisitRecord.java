@@ -9,7 +9,6 @@ public class VisitRecord {
     private String invoiceId;
     private Diagnosis diagnosis;
 
-    
     private String followUpRecommendation;
 
     public VisitRecord(String patientId) {
@@ -23,8 +22,13 @@ public class VisitRecord {
         this.vitals = "";
         this.notes = "";
     }
-    
-    
+
+    public VisitRecord(String patientId) {
+        this.vitals = "";
+        this.notes = "";
+        this.patientId = patientId;
+    }
+
     public String getFollowUpRecommendation() {
         return followUpRecommendation;
     }
@@ -32,6 +36,7 @@ public class VisitRecord {
     public void setFollowUpRecommendation(String recommendation) {
         this.followUpRecommendation = recommendation;
     }
+
     public VisitRecord(String patientId, int nextIdForThisPatient) {
         this.patientId = patientId;
         this.id = nextIdForThisPatient;
@@ -42,8 +47,8 @@ public class VisitRecord {
     public String getId() {
         return id;
     }
-    
-    public void setId(int id) {  
+
+    public void setId(int id) {
         this.id = id;
     }
 

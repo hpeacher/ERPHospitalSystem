@@ -25,9 +25,9 @@ public class PatientRecord {
 
     // Constructor
     public PatientRecord(String patientId,
-                         PatientAdministrativeInfo administrativeInfo,
-                         PatientMedicalInfo medicalInfo,
-                         String insurance) {
+            PatientAdministrativeInfo administrativeInfo,
+            PatientMedicalInfo medicalInfo,
+            String insurance) {
 
         this.patientId = patientId;
         this.administrativeInfo = administrativeInfo;
@@ -41,15 +41,29 @@ public class PatientRecord {
 
     public PatientRecord() {
         this.visits = new ArrayList<>();
-        this.appointments = new ArrayList<>();  // IMPORTANT
+        this.appointments = new ArrayList<>(); // IMPORTANT
     }
 
     // Getters
-    public String getPatientId() { return patientId; }
-    public PatientAdministrativeInfo getAdministrativeInfo() { return administrativeInfo; }
-    public PatientMedicalInfo getMedicalInfo() { return medicalInfo; }
-    public ArrayList<VisitRecord> getVisits() { return visits; }
-    public String getInsurance() { return insurance; }
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public PatientAdministrativeInfo getAdministrativeInfo() {
+        return administrativeInfo;
+    }
+
+    public PatientMedicalInfo getMedicalInfo() {
+        return medicalInfo;
+    }
+
+    public ArrayList<VisitRecord> getVisits() {
+        return visits;
+    }
+
+    public String getInsurance() {
+        return insurance;
+    }
 
     // Setters
     public void setAdministrativeInfo(PatientAdministrativeInfo administrativeInfo) {
@@ -66,6 +80,14 @@ public class PatientRecord {
 
     public void setInsurance(String insurance) {
         this.insurance = insurance;
+    }
+
+    public VisitRecord getMostRecentVisitRecord() {
+        return visits.get(visits.size() - 1);
+    }
+
+    public void updateMostRecentVisitRecord(VisitRecord visitRecord) {
+        visits.set(visits.size() - 1, visitRecord);
     }
 
     public String getMedicalHistory() {

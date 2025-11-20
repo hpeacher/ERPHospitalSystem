@@ -1,8 +1,6 @@
 package com.hospital.repository.impl;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import com.hospital.model.PatientRecord;
 import com.hospital.repository.IPatientFileManager;
@@ -34,7 +32,6 @@ public class PatientFileManager implements IPatientFileManager {
             return false;
         }
     }
-
 
     @Override
     public PatientRecord getPatientRecord(String patientId) {
