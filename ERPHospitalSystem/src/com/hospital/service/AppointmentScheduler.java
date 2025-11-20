@@ -36,10 +36,10 @@ public class AppointmentScheduler {
         }
 
         // 3. Generate new ID
-        int newId = existing.size() + 1;
+        String newId = "APT-" + (existing.size() + 1);
 
-        // 4. Create appointment
-        Appointment appt = new Appointment(newId, patientId, doctorName, date, time);
+     // 4. Create appointment
+     Appointment appt = new Appointment(newId, patientId, doctorName, date, time);
 
         // 5. Save back to patient
         record.addAppointment(appt);

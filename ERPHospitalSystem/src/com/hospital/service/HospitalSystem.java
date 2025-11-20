@@ -50,10 +50,10 @@ public class HospitalSystem {
         display.registerCommand(new RecommendFollowUpCommand(patientFileManager, analyzer, appointmentScheduler, sc
         	));
         display.registerCommand(new ManageAppointmentsCommand(
-                patientFileManager,
-                new AppointmentScheduler(patientFileManager),
-                sc
-        ));
+        	    patientFileManager,
+        	    appointmentScheduler,
+        	    sc
+        	));
 
         /*
          * Main loop that utilizes the display container to allow user commands.

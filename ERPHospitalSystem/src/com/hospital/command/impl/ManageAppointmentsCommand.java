@@ -45,8 +45,9 @@ public class ManageAppointmentsCommand implements ICommand {
         while (true) {
             System.out.println("\n--- Manage Appointments Menu ---");
             System.out.println("1. View appointments");
-            System.out.println("2. Schedule new appointment");
-            System.out.println("3. Cancel appointment");
+            //System.out.println("2. Schedule new appointment");
+            System.out.println("2. Cancel appointment");
+            System.out.println("3. Update appointment");
             System.out.println("4. Exit to main menu");
             System.out.print("Select an option: ");
 
@@ -56,11 +57,14 @@ public class ManageAppointmentsCommand implements ICommand {
                 case "1":
                     viewAppointments(record);
                     break;
-                case "2":
+                /*case "2":
                     createAppointment(patientId);
+                    break;*/
+                case "2":
+                    cancelAppointment(record);
                     break;
                 case "3":
-                    cancelAppointment(record);
+                    updateAppointment(record);
                     break;
                 case "4":
                     return;
@@ -88,7 +92,7 @@ public class ManageAppointmentsCommand implements ICommand {
     }
 
     // ------- CREATE APPOINTMENT -------
-    private void createAppointment(String patientId) {
+    /*private void createAppointment(String patientId) {
         try {
             System.out.print("Enter doctor name: ");
             String doc = sc.nextLine();
@@ -106,7 +110,7 @@ public class ManageAppointmentsCommand implements ICommand {
             System.out.println("- " + "11:30");
             System.out.println("- " + "13:00");
         }
-    }
+    }*/
 
     
    
@@ -121,9 +125,10 @@ public class ManageAppointmentsCommand implements ICommand {
         viewAppointments(record);
 
         System.out.print("Enter appointment ID to cancel: ");
-        int id = Integer.parseInt(sc.nextLine());
+        String id = sc.nextLine();
 
-        boolean removed = list.removeIf(a -> a.getAppointmentId() == id);
+        boolean removed = list.removeIf(a -> a.getAppointmentId().equals(id));
+
 
         if (removed) {
             fileManager.postPatientRecord(record);
@@ -132,4 +137,48 @@ public class ManageAppointmentsCommand implements ICommand {
             System.out.println("Appointment not found.");
         }
     }
+    
+    private void updateAppointment(PatientRecord record) {
+        List<Appointment> list = record.getAppointments();
+        if (list == null || list.isEmpty()) {
+            System.out.println("No appointments to update.");
+            return;
+        }
+
+        viewAppointments(record);
+
+        System.out.print("Enter appointment ID to update: ");
+        String id = sc.nextLine(); 
+
+        Appointment appt = list.stream()
+            .filter(a -> a.getAppointmentId().equals(id))  
+            .findFirst()
+            .orElse(null);
+
+        if (appt == null) {
+            System.out.println("Appointment not found.");
+            return;
+        }
+
+        System.out.print("Enter new doctor name (leave blank to keep \"" +
+                appt.getDoctorName() + "\"): ");
+        String newDoc = sc.nextLine();
+        if (!newDoc.isEmpty()) appt.setDoctorName(newDoc);
+
+        System.out.print("Enter new date (leave blank to keep " +
+                appt.getDate() + "): ");
+        String newDate = sc.nextLine();
+        if (!newDate.isEmpty()) appt.setDate(newDate);
+
+        System.out.print("Enter new time (leave blank to keep " +
+                appt.getTime() + "): ");
+        String newTime = sc.nextLine();
+        if (!newTime.isEmpty()) appt.setTime(newTime);
+
+        fileManager.postPatientRecord(record);
+
+        System.out.println("Appointment updated successfully.");
+    }
+
+
 }
