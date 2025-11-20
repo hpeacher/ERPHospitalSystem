@@ -35,11 +35,13 @@ public class HospitalSystem {
         HospitalSystem system = HospitalSystem.getInstance();
         PatientFileManager patientFileManager = new PatientFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
+        AppointmentScheduler appointmentScheduler = new AppointmentScheduler(patientFileManager);
         system.dischargeManager = new DischargeManager(system.hospital, billingProcessor, patientFileManager);
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);
         DisplayContainer display = new DisplayContainer();
         NurseAssignmentStrategy nurseAssignmentStrategy = new LeastAssignedStrategy(system.hospital);
         HospitalController hospitalController = new HospitalController(system.hospital, nurseAssignmentStrategy);
+        FollowUpAnalyzer analyzer = new FollowUpAnalyzer();
         Scanner sc = new Scanner(System.in);
 
         display.registerCommand(new AdmitPatientCommand(hospitalController, sc));
@@ -48,8 +50,17 @@ public class HospitalSystem {
         display.registerCommand(new HelpCommand(display));
         // display.registerCommand(new DiagnosisCommand());
         display.registerCommand(new DischargePatientCommand(system.dischargeManager, sc));
+        display.registerCommand(new ScheduleAppointmentCommand(appointmentScheduler, sc));
+        display.registerCommand(new RecommendFollowUpCommand(patientFileManager, analyzer, appointmentScheduler, sc));
+        display.registerCommand(new ManageAppointmentsCommand(
+                patientFileManager,
+                appointmentScheduler,
+                sc
+        ));
+
         display.registerCommand(new ManageDoctorsCommand(system.doctorManager, sc));
         display.registerCommand(new ViewEmployeesCommand(system.employeeViewer, sc));
+
 
         /*
          * Main loop that utilizes the display container to allow user commands.
