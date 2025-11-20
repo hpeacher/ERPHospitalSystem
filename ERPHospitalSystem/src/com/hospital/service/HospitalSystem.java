@@ -36,7 +36,7 @@ public class HospitalSystem {
         PatientFileManager patientFileManager = new PatientFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
         AppointmentScheduler appointmentScheduler = new AppointmentScheduler(patientFileManager);
-        system.dischargeManager = new DischargeManager(system.hospital, billingProcessor, patientFileManager);
+        system.dischargeManager = new DischargeManager(system.hospital, patientFileManager);
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);
         DisplayContainer display = new DisplayContainer();
         NurseAssignmentStrategy nurseAssignmentStrategy = new LeastAssignedStrategy(system.hospital);
@@ -55,12 +55,10 @@ public class HospitalSystem {
         display.registerCommand(new ManageAppointmentsCommand(
                 patientFileManager,
                 appointmentScheduler,
-                sc
-        ));
+                sc));
 
         display.registerCommand(new ManageDoctorsCommand(system.doctorManager, sc));
         display.registerCommand(new ViewEmployeesCommand(system.employeeViewer, sc));
-
 
         /*
          * Main loop that utilizes the display container to allow user commands.
@@ -74,72 +72,13 @@ public class HospitalSystem {
 
         sc.close();
         System.exit(0);
-
-        // Schedule Appointment demo
-        // Hardcoded patient data
-        // patients.put("P123", "John Doe");
-        // patients.put("P456", "Jane Smith");
-        // patients.put("P789", "Michael Johnson");
-        // patients.put("P321", "Emily Davis");
-        // patients.put("P654", "David Wilson");
-        // System.out.print("Enter Patient ID: ");
-        // String id = sc.nextLine();
-        // if (!patients.containsKey(id)) {
-        // System.out.println("Patient not found. Please register.");
-        // sc.close();
-        // return;
-        // }
-        // System.out.println("Patient found: " + patients.get(id));
-        // System.out.println("Available doctors: " + doctors);
-        // System.out.print("Select doctor: ");
-        // String doc = sc.nextLine();
-        // if (!doctors.contains(doc)) {
-        // System.out.println("Doctor not available.");
-        // } else {
-        // String confirmation = "A" + (int) (Math.random() * 10000);
-        // System.out.println("Appointment booked with " + doc + " (Confirmation #: " +
-        // confirmation + ")");
-        // }
-        // sc.close();
-
-        // Tirmidi Mohamed — Admit Patient demo
-        // AdmitDTO dto = new AdmitDTO();
-        // dto.patientId = "P001";
-        // dto.name = "Jane Doe";
-        // dto.dob = "2000-01-01";
-        // dto.phone = "515-555-1212";
-        // dto.address = "123 Main St";
-        // dto.department = "ER";
-        // dto.reason = "Chest pain";
-        // String visitId = hospitalController.admitPatient(dto);
-        // System.out.println("Admit complete. Visit ID = " + visitId);
-
-        // IFileStorage storage = new FileStorage("diagnosis_records.txt");
-        // IDiagnosisRepository repo = new DiagnosisRepository(storage);
-        // IDiagnosisService service = new DiagnosisService(repo);
-        // DoctorController controller = new DoctorController(service);
-
-        // PatientAdministrativeInfo adminInfo = new PatientAdministrativeInfo("1",
-        // "John Doe", "1985-06-21", "555-1234",
-        // "123 Main St");
-        // PatientMedicalInfo medicalInfo = new PatientMedicalInfo("1", "M", "O+", "180
-        // cm", "75 kg");
-
-        // PatientRecord patient = new PatientRecord("1", adminInfo, medicalInfo,
-        // "insuranceDefault");
-        // Doctor doctor = new Doctor(101, "Dr. Smith", "Cardiology");
-
-        // controller.requestDiagnose(patient);
-        // doctor.diagnose(patient, "Chest pain due to hypertension", "Lisinopril 10mg
-        // daily", service);
-
     }
 
     private void addStaff() {
         hospital.addNurse(new Nurse("N001", "Alice", hospital));
         hospital.addNurse(new Nurse("N002", "Bob", hospital));
         hospital.addNurse(new Nurse("N003", "Charlie", hospital));
-        
+
         doctorManager.addDoctor(new Doctor("D001", "Dr. Smith", "Cardiology", "Cardiology", "555-1001"));
         doctorManager.addDoctor(new Doctor("D002", "Dr. Johnson", "Pediatrics", "Pediatrics", "555-1002"));
         doctorManager.addDoctor(new Doctor("D003", "Dr. Williams", "Neurology", "Neurology", "555-1003"));

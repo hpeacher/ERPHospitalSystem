@@ -4,16 +4,13 @@ import com.hospital.model.*;
 import com.hospital.repository.IPatientFileManager;
 
 public class DischargeManager {
-    private BillingProcessor billingProcessor;
     private IPatientFileManager patientFileManager;
     private Hospital hospital;
     private final NurseWorkflowService nurseWorkflow;
 
     public DischargeManager(Hospital hospital,
-            BillingProcessor billingProcessor,
             IPatientFileManager patientFileManager) {
         this.hospital = hospital;
-        this.billingProcessor = billingProcessor;
         this.patientFileManager = patientFileManager;
 
         ChecklistProcessor checklistProcessor = new ChecklistProcessor(this::checklistCompleted);
@@ -31,8 +28,7 @@ public class DischargeManager {
         nurseWorkflow.handleDischargeInitiation(nurse, patientRecord);
     }
 
-    public void checklistCompleted(VisitRecord visitRecord) {
-        PatientRecord patientRecord = billingProcessor.startBillingProcess(visitRecord);
+    public void checklistCompleted(PatientRecord patientRecord) {
         if (patientRecord == null) {
             System.out.println("Discharge Summary not generated");
             return;

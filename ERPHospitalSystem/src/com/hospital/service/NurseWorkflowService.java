@@ -24,7 +24,8 @@ public class NurseWorkflowService {
             if (record.getDischargeChecklist() == null) {
                 checklistProcessor.initiateChecklist(record);
             }
-            checklistProcessor.completeChecklist(record, "Notes for " + patientRecord.getPatientId(), nurse.getName());
+            checklistProcessor.completeChecklist(patientRecord, record, "Notes for " + patientRecord.getPatientId(),
+                    nurse.getName());
         }
     }
 

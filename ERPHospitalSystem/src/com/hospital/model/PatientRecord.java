@@ -84,6 +84,11 @@ public class PatientRecord {
 
     public VisitRecord getMostRecentVisitRecord() {
         return visits.get(visits.size() - 1);
+    }
+
+    public void updateMostRecentVisitRecord(VisitRecord visitRecord) {
+        visits.set(visits.size() - 1, visitRecord);
+    }
 
     public String getMedicalHistory() {
         return "Retrieving medical history for: " + administrativeInfo.getName();
