@@ -10,7 +10,7 @@ public class VitalsRecorder {
 
     public VisitRecord recordVitals(String patientId) {
         // Implementation for recording vitals
-        VisitRecord visitRecord = new VisitRecord(patientId);
+        VisitRecord visitRecord = new VisitRecord();
         visitRecord.setVitals("Sample Vitals Data for Patient ID: " + patientId);
         return visitRecord;
     }
