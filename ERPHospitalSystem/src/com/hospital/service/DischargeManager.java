@@ -31,14 +31,13 @@ public class DischargeManager {
     }
 
     public void checklistCompleted(VisitRecord visitRecord) {
-        PatientRecord patientRecord = billingProcessor.startBillingProcess(visitRecord);
-        if (patientRecord == null) {
-            System.out.println("Discharge Summary not generated");
-            return;
-        }
-
+        PatientRecord patientRecord = patientFileManager.getPatientRecord(visitRecord.getPatientId());
+        Invoice invoice = billingProcessor.generateInvoice(visitRecord.getPatientId(), visitRecord.getId(),
+                1000.0,
+                patientRecord.getInsurance());
+        visitRecord.setInvoice(invoice);
+        patientRecord.addVisit(visitRecord);
         patientFileManager.postPatientRecord(patientRecord);
         System.out.println("Discharge summary generated for Patient ID: " + patientRecord.getPatientId());
-
     }
 }

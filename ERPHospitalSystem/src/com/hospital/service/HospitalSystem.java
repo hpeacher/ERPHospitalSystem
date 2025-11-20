@@ -4,6 +4,8 @@ import java.util.Scanner;
 import com.hospital.command.NurseAssignmentStrategy;
 import com.hospital.command.impl.*;
 import com.hospital.model.*;
+import com.hospital.repository.IInvoiceFileManager;
+import com.hospital.repository.impl.InvoiceFileManager;
 import com.hospital.repository.impl.PatientFileManager;
 
 public class HospitalSystem {
@@ -30,6 +32,7 @@ public class HospitalSystem {
         // Initialize the Hospital System
         HospitalSystem system = HospitalSystem.getInstance();
         PatientFileManager patientFileManager = new PatientFileManager();
+        IInvoiceFileManager invoiceFileManager = new InvoiceFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
         system.dischargeManager = new DischargeManager(system.hospital, billingProcessor, patientFileManager);
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);
@@ -44,6 +47,7 @@ public class HospitalSystem {
         display.registerCommand(new HelpCommand(display));
         // display.registerCommand(new DiagnosisCommand());
         display.registerCommand(new DischargePatientCommand(system.dischargeManager, sc));
+        display.registerCommand(new ProcessInvoiceCommand(billingProcessor, sc, invoiceFileManager));
 
         /*
          * Main loop that utilizes the display container to allow user commands.
@@ -84,18 +88,6 @@ public class HospitalSystem {
         // confirmation + ")");
         // }
         // sc.close();
-
-        // Tirmidi Mohamed — Admit Patient demo
-        // AdmitDTO dto = new AdmitDTO();
-        // dto.patientId = "P001";
-        // dto.name = "Jane Doe";
-        // dto.dob = "2000-01-01";
-        // dto.phone = "515-555-1212";
-        // dto.address = "123 Main St";
-        // dto.department = "ER";
-        // dto.reason = "Chest pain";
-        // String visitId = hospitalController.admitPatient(dto);
-        // System.out.println("Admit complete. Visit ID = " + visitId);
 
         // IFileStorage storage = new FileStorage("diagnosis_records.txt");
         // IDiagnosisRepository repo = new DiagnosisRepository(storage);

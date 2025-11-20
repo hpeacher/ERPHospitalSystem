@@ -1,25 +1,34 @@
 package com.hospital.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Invoice {
-    private int id;
+    private String id;
     private double cost;
     private String patientId;
+    private String visitId;
     private String insurance;
-    private boolean finalized;
+    private String createdAt;
+    private String finalizedAt;
 
-    public Invoice(int id, double cost, String patientId, String insurance) {
+    public Invoice(String id, double cost, String patientId, String visitId, String insurance) {
         this.id = id;
         this.cost = cost;
         this.patientId = patientId;
+        this.visitId = visitId;
         this.insurance = insurance;
-        this.finalized = false;
+        this.createdAt = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.finalizedAt = null;
+
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,6 +48,14 @@ public class Invoice {
         this.patientId = patientId;
     }
 
+    public String getVisitId() {
+        return visitId;
+    }
+
+    public void setVisitId(String visitId) {
+        this.visitId = visitId;
+    }
+
     public String getInsurance() {
         return insurance;
     }
@@ -47,11 +64,21 @@ public class Invoice {
         this.insurance = insurance;
     }
 
-    public boolean isFinalized() {
-        return finalized;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setFinalized(boolean finalized) {
-        this.finalized = finalized;
+    public String getFinalizedAt() {
+        return finalizedAt;
+    }
+
+    public boolean isFinalized() {
+        return finalizedAt != null;
+    }
+
+    public void setFinalized() {
+        this.finalizedAt = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        ;
     }
 }
