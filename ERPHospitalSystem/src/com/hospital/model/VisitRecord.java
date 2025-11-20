@@ -9,20 +9,35 @@ public class VisitRecord {
     private Invoice invoice;
     private Diagnosis diagnosis;
 
-    private static int visitIdCounter = 0;
+    
+    private String followUpRecommendation;
 
-    public VisitRecord(String patientId) {
-        this.id = ++visitIdCounter;
+    public VisitRecord() {
+        this.vitals = "";
+        this.notes = "";
+    }
+    
+    
+    public String getFollowUpRecommendation() {
+        return followUpRecommendation;
+    }
+
+    public void setFollowUpRecommendation(String recommendation) {
+        this.followUpRecommendation = recommendation;
+    }
+    public VisitRecord(String patientId, int nextIdForThisPatient) {
         this.patientId = patientId;
-        this.vitals = null;
-        this.notes = null;
-        this.dischargeChecklist = null;
-        this.invoice = null;
-        this.diagnosis = null;
+        this.id = nextIdForThisPatient;
+        this.vitals = "";
+        this.notes = "";
     }
 
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id) {  
+        this.id = id;
     }
 
     public String getPatientId() {
