@@ -10,13 +10,17 @@ public class HospitalSystem {
     private static HospitalSystem instance;
     private Hospital hospital;
     private DischargeManager dischargeManager;
+    private DoctorManager doctorManager;
+    private EmployeeViewer employeeViewer;
     private static int patientIndexCounter = 0;
     private boolean running = true;
     final static int DEFAULT_CAPACITY = 100;
 
     private HospitalSystem(int capacity) {
         this.hospital = new Hospital(capacity);
+        this.doctorManager = new DoctorManager();
         addStaff();
+        this.employeeViewer = new EmployeeViewer(hospital, doctorManager);
     }
 
     public static synchronized HospitalSystem getInstance() {
@@ -47,13 +51,16 @@ public class HospitalSystem {
         // display.registerCommand(new DiagnosisCommand());
         display.registerCommand(new DischargePatientCommand(system.dischargeManager, sc));
         display.registerCommand(new ScheduleAppointmentCommand(appointmentScheduler, sc));
-        display.registerCommand(new RecommendFollowUpCommand(patientFileManager, analyzer, appointmentScheduler, sc
-        	));
+        display.registerCommand(new RecommendFollowUpCommand(patientFileManager, analyzer, appointmentScheduler, sc));
         display.registerCommand(new ManageAppointmentsCommand(
-        	    patientFileManager,
-        	    appointmentScheduler,
-        	    sc
-        	));
+                patientFileManager,
+                appointmentScheduler,
+                sc
+        ));
+
+        display.registerCommand(new ManageDoctorsCommand(system.doctorManager, sc));
+        display.registerCommand(new ViewEmployeesCommand(system.employeeViewer, sc));
+
 
         /*
          * Main loop that utilizes the display container to allow user commands.
@@ -132,6 +139,10 @@ public class HospitalSystem {
         hospital.addNurse(new Nurse("N001", "Alice", hospital));
         hospital.addNurse(new Nurse("N002", "Bob", hospital));
         hospital.addNurse(new Nurse("N003", "Charlie", hospital));
+        
+        doctorManager.addDoctor(new Doctor("D001", "Dr. Smith", "Cardiology", "Cardiology", "555-1001"));
+        doctorManager.addDoctor(new Doctor("D002", "Dr. Johnson", "Pediatrics", "Pediatrics", "555-1002"));
+        doctorManager.addDoctor(new Doctor("D003", "Dr. Williams", "Neurology", "Neurology", "555-1003"));
     }
 
     public Hospital getHospital() {
