@@ -13,15 +13,18 @@ public class NurseWorkflowService {
         this.checklistProcessor = checklistProcessor;
     }
 
-    public void handleDischargeInitiation(Nurse nurse, String patientId) {
-        if (!hospital.getPatientsAssignedTo(nurse.getId()).contains(patientId))
+    public void handleDischargeInitiation(Nurse nurse, PatientRecord patientRecord) {
+        if (!hospital.getPatientsAssignedTo(nurse.getId()).contains(patientRecord.getPatientId()))
             return;
 
-        System.out.println("Nurse " + nurse.getId() + " notified: Discharge initiated for " + patientId);
-        VisitRecord record = vitalsRecorder.recordVitals(patientId);
+        System.out.println(
+                "Nurse " + nurse.getId() + " notified: Discharge initiated for " + patientRecord.getPatientId());
+        VisitRecord record = vitalsRecorder.recordVitals(patientRecord);
         if (record != null) {
-            checklistProcessor.initiateChecklist(record);
-            checklistProcessor.completeChecklist(record, "Notes for " + patientId, nurse.getName());
+            if (record.getDischargeChecklist() == null) {
+                checklistProcessor.initiateChecklist(record);
+            }
+            checklistProcessor.completeChecklist(record, "Notes for " + patientRecord.getPatientId(), nurse.getName());
         }
     }
 

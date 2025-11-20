@@ -27,7 +27,8 @@ public class DischargeManager {
             System.out.println("Nurse assigned to patient not found, DISCHARGE FAILED.");
             return;
         }
-        nurseWorkflow.handleDischargeInitiation(nurse, patientId);
+        PatientRecord patientRecord = patientFileManager.getPatientRecord(patientId);
+        nurseWorkflow.handleDischargeInitiation(nurse, patientRecord);
     }
 
     public void checklistCompleted(VisitRecord visitRecord) {

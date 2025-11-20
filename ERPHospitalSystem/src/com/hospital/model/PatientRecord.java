@@ -64,4 +64,8 @@ public class PatientRecord {
     public void setInsurance(String insurance) {
         this.insurance = insurance;
     }
+
+    public VisitRecord getMostRecentVisitRecord() {
+        return visits.get(visits.size() - 1);
+    }
 }
