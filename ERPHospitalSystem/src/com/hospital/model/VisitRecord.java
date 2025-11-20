@@ -2,6 +2,7 @@ package com.hospital.model;
 
 public class VisitRecord {
     private int id;
+    private String date;
     private String patientId;
     private String vitals;
     private String notes;
@@ -11,7 +12,7 @@ public class VisitRecord {
 
     private static int visitIdCounter = 0;
 
-    public VisitRecord(String patientId) {
+    public VisitRecord(String patientId, String date) {
         this.id = ++visitIdCounter;
         this.patientId = patientId;
         this.vitals = null;
@@ -19,6 +20,7 @@ public class VisitRecord {
         this.dischargeChecklist = null;
         this.invoice = null;
         this.diagnosis = null;
+        this.date = date;
     }
 
     public int getId() {
@@ -67,5 +69,11 @@ public class VisitRecord {
 
     public void setDiagnosis(Diagnosis diagnosis) {
         this.diagnosis = diagnosis;
+    }
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
     }
 }

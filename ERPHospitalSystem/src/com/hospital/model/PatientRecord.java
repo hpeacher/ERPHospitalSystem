@@ -71,6 +71,32 @@ public class PatientRecord {
     public void setVisits(ArrayList<VisitRecord> visits) {
         this.visits = visits;
     }
+
+    public PatientAdministrativeInfo getAdminInfo() {
+        return this.administrativeInfo;
+    }
+    public void setAdminInfo(PatientAdministrativeInfo adminInfo) {
+        this.administrativeInfo = adminInfo;
+    }
+    public PatientMedicalInfo getMedInfo() {
+        return this.medicalInfo;
+    }
+    public void setMedInfo(PatientMedicalInfo medInfo) {
+        this.medicalInfo = medInfo;
+    }
+
+    public void setVisitHistory(ArrayList<VisitRecord> visitHistory) {
+        this.visits = visitHistory;
+    }
+
+    public ArrayList<VisitRecord> getVisitRecords() {
+        return this.visits;
+    }
+
+    public VisitRecord getVisitRecord(int index) {
+        return this.visits.get(index - 1);
+    }
+
     public void deleteVisitRecord(){
         this.visits = new ArrayList<>();
     }

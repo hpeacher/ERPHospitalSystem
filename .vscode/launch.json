@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "ViewPatientRecordTest",
+      "request": "launch",
+      "mainClass": "com.hospital.command.impl.ViewPatientRecordTest",
+      "projectName": "ERPHospitalSystem_33a18502"
+    },
+    {
+      "type": "java",
       "name": "DeletePatientRecordCommandManualTest",
       "request": "launch",
       "mainClass": "com.hospital.command.impl.DeletePatientRecordCommandManualTest",

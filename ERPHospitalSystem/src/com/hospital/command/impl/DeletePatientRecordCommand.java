@@ -1,12 +1,8 @@
 package com.hospital.command.impl;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import com.hospital.command.ICommand;
-import com.hospital.model.PatientAdministrativeInfo;
-import com.hospital.model.PatientMedicalInfo;
 import com.hospital.model.PatientRecord;
-import com.hospital.model.VisitRecord;
 import com.hospital.repository.impl.PatientFileManager;
 
 public class DeletePatientRecordCommand implements ICommand{
@@ -63,27 +59,16 @@ public class DeletePatientRecordCommand implements ICommand{
             fileManager.postPatientRecord(record);     
         }
 
-     private void deleteAdministrative(PatientRecord record) {
-        System.out.println("Deleting Administrative Info...");
-        record.setAdministrativeInfo(null);
-        fileManager.postPatientRecord(record);
-        System.out.println("Administrative info removed.");
-    }
-
-    private void deleteMedical(PatientRecord record) {
-        System.out.println("Deleting Medical Info...");
-        record.setMedicalInfo(null);
-        fileManager.postPatientRecord(record);
-        System.out.println("Medical info removed.");
-    }
-
 
     private void deleteFullRecord(String patientId) {
-        System.out.println("Deleting ENTIRE patient record...");
-        if (fileManager.deletePatientRecord(patientId)) {
-            System.out.println("Patient record fully deleted.");
-        } else {
-            System.out.println("Failed to delete patient record.");
+         System.out.println("Delete ALL administrative info? (y/n)");
+        String c = sc.nextLine();
+        if (c.equalsIgnoreCase("y")) {
+            if(fileManager.deletePatientRecord(patientId)){
+                System.out.println("Patient record deleted.");
+            } else {
+                System.out.println("Patient record not found.");
+            }
         }
     }
 
@@ -127,7 +112,7 @@ public class DeletePatientRecordCommand implements ICommand{
         System.out.println("Enter visit number to delete:");
         int visitIndex = Integer.parseInt(sc.nextLine());
 
-        boolean removed = record.deleteVisit(visitIndex - 1);
+        boolean removed = record.deleteVisit(visitIndex);
         if (removed) {
             System.out.println("Visit deleted.");
         } else {
