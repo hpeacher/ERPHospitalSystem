@@ -36,6 +36,5 @@ public class DischargeManager {
 
         patientFileManager.postPatientRecord(patientRecord);
         System.out.println("Discharge summary generated for Patient ID: " + patientRecord.getPatientId());
-
     }
 }

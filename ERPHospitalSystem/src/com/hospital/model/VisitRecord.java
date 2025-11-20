@@ -1,16 +1,23 @@
 package com.hospital.model;
 
 public class VisitRecord {
-    private int id;
+    private String id;
     private String patientId;
     private String vitals;
     private String notes;
     private DischargeChecklist dischargeChecklist;
-    private Invoice invoice;
+    private String invoiceId;
     private Diagnosis diagnosis;
 
     private String followUpRecommendation;
 
+    public VisitRecord(String patientId) {
+        this.id = "V" + ++visitIdCounter;
+        this.patientId = patientId;
+        this.vitals = null;
+        this.notes = null;
+        this.dischargeChecklist = null;
+        this.diagnosis = null;
     public VisitRecord() {
         this.vitals = "";
         this.notes = "";
@@ -37,7 +44,7 @@ public class VisitRecord {
         this.notes = "";
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -73,12 +80,12 @@ public class VisitRecord {
         this.dischargeChecklist = dischargeChecklist;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public String getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public void setInvoiceId(String invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public Diagnosis getDiagnosis() {

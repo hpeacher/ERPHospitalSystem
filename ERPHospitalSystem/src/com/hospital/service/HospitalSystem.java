@@ -4,6 +4,8 @@ import java.util.Scanner;
 import com.hospital.command.NurseAssignmentStrategy;
 import com.hospital.command.impl.*;
 import com.hospital.model.*;
+import com.hospital.repository.IInvoiceFileManager;
+import com.hospital.repository.impl.InvoiceFileManager;
 import com.hospital.repository.impl.PatientFileManager;
 
 public class HospitalSystem {
@@ -34,6 +36,7 @@ public class HospitalSystem {
         // Initialize the Hospital System
         HospitalSystem system = HospitalSystem.getInstance();
         PatientFileManager patientFileManager = new PatientFileManager();
+        IInvoiceFileManager invoiceFileManager = new InvoiceFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
         AppointmentScheduler appointmentScheduler = new AppointmentScheduler(patientFileManager);
         system.dischargeManager = new DischargeManager(system.hospital, patientFileManager);
@@ -59,6 +62,7 @@ public class HospitalSystem {
 
         display.registerCommand(new ManageDoctorsCommand(system.doctorManager, sc));
         display.registerCommand(new ViewEmployeesCommand(system.employeeViewer, sc));
+        display.registerCommand(new ProcessInvoiceCommand(billingProcessor, sc, invoiceFileManager));
 
         /*
          * Main loop that utilizes the display container to allow user commands.
