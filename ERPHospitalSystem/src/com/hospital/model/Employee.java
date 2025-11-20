@@ -1,6 +1,18 @@
 package com.hospital.model;
 
 public class Employee {
+
+    private String employeeId;
+    private String name;
+    private String role;
+    private String department;
+    private String email;
+    private String phone;
+
+    public Employee() {}
+
+    public Employee(String employeeId, String name,
+                    String role, String department, String email, String phone) {
     protected String employeeId;
     protected String name;
     protected String role;
@@ -12,6 +24,8 @@ public class Employee {
         this.name = name;
         this.role = role;
         this.department = department;
+        this.email = email;
+        this.phone = phone;
         this.contactInfo = contactInfo;
     }
 
@@ -30,6 +44,7 @@ public class Employee {
         return name;
     }
 
+    public void setName(String firstName) {
     public void setName(String name) {
         this.name = name;
     }
@@ -50,6 +65,20 @@ public class Employee {
         this.department = department;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     public String getContactInfo() {
         return contactInfo;
     }
