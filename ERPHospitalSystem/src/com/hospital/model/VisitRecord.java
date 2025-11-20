@@ -1,28 +1,55 @@
 package com.hospital.model;
 
 public class VisitRecord {
-    private int id;
+    private String id;
     private String patientId;
     private String vitals;
     private String notes;
     private DischargeChecklist dischargeChecklist;
-    private Invoice invoice;
+    private String invoiceId;
     private Diagnosis diagnosis;
 
-    private static int visitIdCounter = 0;
+    private String followUpRecommendation;
 
     public VisitRecord(String patientId) {
-        this.id = ++visitIdCounter;
+        this.id = "V" + ++visitIdCounter;
         this.patientId = patientId;
         this.vitals = null;
         this.notes = null;
         this.dischargeChecklist = null;
-        this.invoice = null;
         this.diagnosis = null;
+    public VisitRecord() {
+        this.vitals = "";
+        this.notes = "";
     }
 
-    public int getId() {
+    public VisitRecord(String patientId) {
+        this.vitals = "";
+        this.notes = "";
+        this.patientId = patientId;
+    }
+
+    public String getFollowUpRecommendation() {
+        return followUpRecommendation;
+    }
+
+    public void setFollowUpRecommendation(String recommendation) {
+        this.followUpRecommendation = recommendation;
+    }
+
+    public VisitRecord(String patientId, int nextIdForThisPatient) {
+        this.patientId = patientId;
+        this.id = nextIdForThisPatient;
+        this.vitals = "";
+        this.notes = "";
+    }
+
+    public String getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPatientId() {
@@ -53,12 +80,12 @@ public class VisitRecord {
         this.dischargeChecklist = dischargeChecklist;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public String getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public void setInvoiceId(String invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public Diagnosis getDiagnosis() {

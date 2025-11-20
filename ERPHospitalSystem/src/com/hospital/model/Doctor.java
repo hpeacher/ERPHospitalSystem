@@ -1,32 +1,30 @@
 package com.hospital.model;
 
 import com.hospital.service.IDiagnosisService;
+import java.util.ArrayList;
 
-public class Doctor {
-    private int doctorId;
-    private String name;
+public class Doctor extends Employee {
     private String specialty;
+    private ArrayList<String> assignedPatients;
+
+    public Doctor(String doctorId, String name, String specialty, String department, String contactInfo) {
+        super(doctorId, name, "Doctor", department, contactInfo);
+        this.specialty = specialty;
+        this.assignedPatients = new ArrayList<>();
+    }
 
     public Doctor(int doctorId, String name, String specialty) {
-        this.doctorId = doctorId;
-        this.name = name;
+        super(String.valueOf(doctorId), name, "Doctor", "General", "N/A");
         this.specialty = specialty;
+        this.assignedPatients = new ArrayList<>();
     }
 
-    public int getDoctorId() {
-        return doctorId;
+    public String getDoctorId() {
+        return employeeId;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setDoctorId(String doctorId) {
+        this.employeeId = doctorId;
     }
 
     public String getSpecialty() {
@@ -37,7 +35,32 @@ public class Doctor {
         this.specialty = specialty;
     }
 
+    public void assignPatient(String patientId) {
+        if (!assignedPatients.contains(patientId)) {
+            assignedPatients.add(patientId);
+        }
+    }
+
+    public void unassignPatient(String patientId) {
+        assignedPatients.remove(patientId);
+    }
+
+    public boolean hasActivePatients() {
+        return !assignedPatients.isEmpty();
+    }
+
+    public ArrayList<String> getAssignedPatients() {
+        return assignedPatients;
+    }
+
     public void diagnose(PatientRecord patient, String description, String prescription, IDiagnosisService service) {
         service.saveDiagnosis(patient.getPatientId(), description, prescription);
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor ID: " + employeeId + " | Name: " + name + " | Specialty: " + specialty +
+               " | Department: " + department + " | Contact: " + contactInfo +
+               " | Active Patients: " + assignedPatients.size();
     }
 }

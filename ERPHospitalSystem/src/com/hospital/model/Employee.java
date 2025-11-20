@@ -13,12 +13,23 @@ public class Employee {
 
     public Employee(String employeeId, String name,
                     String role, String department, String email, String phone) {
+    protected String employeeId;
+    protected String name;
+    protected String role;
+    protected String department;
+    protected String contactInfo;
+
+    public Employee(String employeeId, String name, String role, String department, String contactInfo) {
         this.employeeId = employeeId;
         this.name = name;
         this.role = role;
         this.department = department;
         this.email = email;
         this.phone = phone;
+        this.contactInfo = contactInfo;
+    }
+
+    public Employee() {
     }
 
     public String getEmployeeId() {
@@ -34,6 +45,7 @@ public class Employee {
     }
 
     public void setName(String firstName) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -67,18 +79,17 @@ public class Employee {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeId='" + employeeId + '\'' +
-                ", name='" + name + '\'' +
-                ", role='" + role + '\'' +
-                ", department='" + department + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+        return "ID: " + employeeId + " | Name: " + name + " | Role: " + role + 
+               " | Dept: " + department + " | Contact: " + contactInfo;
     }
 }
-
