@@ -26,7 +26,6 @@ public class ProcessInvoiceCommand implements ICommand {
 
     @Override
     public void execute() {
-        // TODO
         System.out.println("Enter invoice id to process: ");
         String invoiceId = scanner.nextLine();
 
