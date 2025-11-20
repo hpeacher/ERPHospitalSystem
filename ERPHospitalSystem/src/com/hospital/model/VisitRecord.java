@@ -6,7 +6,7 @@ public class VisitRecord {
     private String vitals;
     private String notes;
     private DischargeChecklist dischargeChecklist;
-    private Invoice invoice;
+    private String invoiceId;
     private Diagnosis diagnosis;
 
     private static int visitIdCounter = 0;
@@ -17,7 +17,6 @@ public class VisitRecord {
         this.vitals = null;
         this.notes = null;
         this.dischargeChecklist = null;
-        this.invoice = null;
         this.diagnosis = null;
     }
 
@@ -53,12 +52,12 @@ public class VisitRecord {
         this.dischargeChecklist = dischargeChecklist;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public String getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public void setInvoiceId(String invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public Diagnosis getDiagnosis() {

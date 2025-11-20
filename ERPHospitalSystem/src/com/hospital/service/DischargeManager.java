@@ -35,7 +35,7 @@ public class DischargeManager {
         Invoice invoice = billingProcessor.generateInvoice(visitRecord.getPatientId(), visitRecord.getId(),
                 1000.0,
                 patientRecord.getInsurance());
-        visitRecord.setInvoice(invoice);
+        visitRecord.setInvoiceId(invoice.getId());
         patientRecord.addVisit(visitRecord);
         patientFileManager.postPatientRecord(patientRecord);
         System.out.println("Discharge summary generated for Patient ID: " + patientRecord.getPatientId());
