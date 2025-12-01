@@ -1,0 +1,6 @@
+{
+  "medicationId": "MED002",
+  "name": "Paracetamol 650mg Tablet",
+  "quantityAvailable": 250,
+  "reorderThreshold": 50
+}

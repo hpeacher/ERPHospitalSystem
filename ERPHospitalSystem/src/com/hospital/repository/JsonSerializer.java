@@ -49,7 +49,8 @@ public class JsonSerializer {
 
     /**
      * Deserialize JSON file into a List<T>.
-     * Example: readListFromFile(file, new TypeToken<List<PatientRecord>>() {}.getType());
+     * Example: readListFromFile(file, new TypeToken<List<PatientRecord>>()
+     * {}.getType());
      */
     public static <T> T readListFromFile(File file, Type type) {
         try (FileReader reader = new FileReader(file)) {

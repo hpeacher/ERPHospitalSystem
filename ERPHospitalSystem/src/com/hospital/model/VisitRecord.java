@@ -11,13 +11,6 @@ public class VisitRecord {
 
     private String followUpRecommendation;
 
-    public VisitRecord(String patientId) {
-        this.id = "V" + ++visitIdCounter;
-        this.patientId = patientId;
-        this.vitals = null;
-        this.notes = null;
-        this.dischargeChecklist = null;
-        this.diagnosis = null;
     public VisitRecord() {
         this.vitals = "";
         this.notes = "";
@@ -39,7 +32,7 @@ public class VisitRecord {
 
     public VisitRecord(String patientId, int nextIdForThisPatient) {
         this.patientId = patientId;
-        this.id = nextIdForThisPatient;
+        this.id = "V" + nextIdForThisPatient;
         this.vitals = "";
         this.notes = "";
     }
@@ -48,7 +41,7 @@ public class VisitRecord {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
