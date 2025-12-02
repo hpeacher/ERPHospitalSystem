@@ -8,28 +8,22 @@ import com.hospital.repository.impl.PatientFileManager;
 
 
 public class DeletePatientRecordCommand implements ICommand{
-
-
    private final PatientFileManager fileManager;
    private final Scanner sc;
-
-
+   
    public DeletePatientRecordCommand(PatientFileManager fileManager, Scanner sc){
        this.fileManager = fileManager;
        this.sc = sc;
    }
-
 
    @Override
    public String getToken() {
        return "deletePatientRecord";
    }
 
-
    @Override
    public void execute() {
        System.out.println("=== Delete Patient Record ===");
-
 
        System.out.println("Enter Patient Id: ");
        String patientId = sc.nextLine();
@@ -42,32 +36,24 @@ public class DeletePatientRecordCommand implements ICommand{
        System.out.println("3. Visit record");
        System.out.println("4. Entire Patient Record");
 
-
        String choice = sc.nextLine();
-
 
        switch (choice){
            case "1":
                confirmDeleteAdministrative(record);
                break;
-
-
            case "2":
                confirmDeleteMedical(record);
                break;
            case "3":
                handleDeleteVisitHistory(record);
                break;
-          
            case "4":
                deleteFullRecord(patientId);
                break;
            }  
            fileManager.postPatientRecord(record);    
        }
-
-
-
 
    private void deleteFullRecord(String patientId) {
         System.out.println("Delete ALL administrative info? (y/n)");
@@ -81,17 +67,14 @@ public class DeletePatientRecordCommand implements ICommand{
        }
    }
 
-
    private void handleDeleteVisitHistory(PatientRecord record){
        System.out.println("Visit History Options:");
        System.out.println("1 - Delete ALL visit history");
        System.out.println("2 - Delete a specific visit");
        System.out.println("3 - Delete most recent visit");
 
-
        String option = sc.nextLine();
-
-
+      
        switch (option){
            case "1":
                System.out.println("Are you sure you want to delete all the patients visit records?");
@@ -110,10 +93,8 @@ public class DeletePatientRecordCommand implements ICommand{
                break;
           
            case "3":
-               
                System.out.println("Most recent visit deleted.");
                break;
-          
            default:
                System.out.println("Invalid option.");
        }
@@ -122,10 +103,8 @@ public class DeletePatientRecordCommand implements ICommand{
        System.out.println("Visit List:");
        record.printVisitHistory();
 
-
        System.out.println("Enter visit number to delete:");
        int visitIndex = Integer.parseInt(sc.nextLine());
-
 
        boolean removed = record.deleteVisit(visitIndex);
        if (removed) {
@@ -134,7 +113,6 @@ public class DeletePatientRecordCommand implements ICommand{
            System.out.println("Invalid visit number.");
        }
    }
-
 
    private void confirmDeleteAdministrative(PatientRecord record) {
        System.out.println("Delete ALL administrative info? (y/n)");
@@ -145,7 +123,6 @@ public class DeletePatientRecordCommand implements ICommand{
        }
    }
 
-
    private void confirmDeleteMedical(PatientRecord record) {
        System.out.println("Delete ALL medical info? (y/n)");
        String c = sc.nextLine();
@@ -154,9 +131,4 @@ public class DeletePatientRecordCommand implements ICommand{
            System.out.println("Medical info deleted.");
        }
    }
-
-
 }
-
-
-
