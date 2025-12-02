@@ -124,7 +124,8 @@ public class ViewPatientRecordCommand implements ICommand{
        int i = 1;
        for (VisitRecord visit : record.getVisitHistory()) {
            System.out.println("\nVisit #" + i++);
-           System.out.println("Date: " + visit.getDate());
+
+           System.out.println("Visit Id: " + visit.getId());
        }
    }
 
@@ -241,9 +242,6 @@ private void editVisits(PatientRecord record) {
        }
 
 
-       System.out.print("Date (" + visit.getDate() + "): ");
-       String date = sc.nextLine();
-       if (!date.isEmpty()) visit.setDate(date);
 
 
        fileManager.postPatientRecord(record);

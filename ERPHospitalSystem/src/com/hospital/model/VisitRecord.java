@@ -25,11 +25,6 @@ public class VisitRecord {
         this.notes = "";
     }
 
-    public VisitRecord(String patientId) {
-        this.vitals = "";
-        this.notes = "";
-        this.patientId = patientId;
-    }
 
     public String getFollowUpRecommendation() {
         return followUpRecommendation;
@@ -46,7 +41,7 @@ public class VisitRecord {
         this.notes = "";
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
