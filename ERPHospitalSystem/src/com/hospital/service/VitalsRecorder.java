@@ -1,5 +1,6 @@
 package com.hospital.service;
 
+import com.hospital.model.PatientRecord;
 import com.hospital.model.VisitRecord;
 
 public class VitalsRecorder {
@@ -8,10 +9,14 @@ public class VitalsRecorder {
 
     }
 
-    public VisitRecord recordVitals(String patientId) {
+    public VisitRecord recordVitals(PatientRecord patientRecord) {
         // Implementation for recording vitals
-        VisitRecord visitRecord = new VisitRecord(patientId, "2024-01-01");
-        visitRecord.setVitals("Sample Vitals Data for Patient ID: " + patientId);
-        return visitRecord;
+        VisitRecord visit = patientRecord.getMostRecentVisitRecord();
+        if (visit == null) {
+            visit = new VisitRecord(patientRecord.getPatientId());
+        }
+
+        visit.setVitals("Sample Vitals Data for Patient ID: " + patientRecord.getPatientId());
+        return visit;
     }
 }
