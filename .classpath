@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="ERPHospitalSystem/src"/>
-	<classpathentry kind="lib" path="C:/Users/joshs/Downloads/gson-2.10.1.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.10.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
+d
