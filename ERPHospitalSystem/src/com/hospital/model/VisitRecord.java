@@ -12,6 +12,10 @@ public class VisitRecord {
 
     private static int visitIdCounter = 0;
 
+    public VisitRecord(String patientId) {
+        this.patientId = patientId;
+    }
+
     public VisitRecord(String patientId, String date) {
         this.id = ++visitIdCounter;
         this.patientId = patientId;
