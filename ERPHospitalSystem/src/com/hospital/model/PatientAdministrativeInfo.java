@@ -7,6 +7,9 @@ public class PatientAdministrativeInfo {
     private String phoneNumber;
     private String address;
 
+    public PatientAdministrativeInfo() {
+    }
+
     public PatientAdministrativeInfo(String patientId, String name, String dateOfBirth, String phoneNumber,
             String address) {
         this.patientId = patientId;
