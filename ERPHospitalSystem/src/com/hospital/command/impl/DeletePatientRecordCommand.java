@@ -34,13 +34,7 @@ public class DeletePatientRecordCommand implements ICommand{
        System.out.println("Enter Patient Id: ");
        String patientId = sc.nextLine();
 
-
        PatientRecord record = fileManager.getPatientRecord(patientId);
-      
-       fileManager.postPatientRecord(record); 
-
-
-
 
        System.out.println("What would you like to delete?");
        System.out.println("1. Administrative Info");
