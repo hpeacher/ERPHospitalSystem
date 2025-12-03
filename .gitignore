@@ -1,4 +1,5 @@
 patient_directory/*
+invoice_directory/*
 
 # Compiled class file
 *.class
