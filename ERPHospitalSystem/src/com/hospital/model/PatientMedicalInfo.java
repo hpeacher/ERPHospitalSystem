@@ -7,6 +7,8 @@ public class PatientMedicalInfo {
     private String height;
     private String weight;
 
+    public PatientMedicalInfo(){}
+
     // Constructor
     public PatientMedicalInfo(String patientId, String gender, String bloodType, String height, String weight) {
         this.patientId = patientId;

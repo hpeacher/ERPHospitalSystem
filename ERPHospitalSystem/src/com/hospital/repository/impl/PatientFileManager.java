@@ -1,8 +1,6 @@
 package com.hospital.repository.impl;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import com.hospital.model.PatientRecord;
 import com.hospital.repository.IPatientFileManager;
@@ -16,29 +14,27 @@ public class PatientFileManager implements IPatientFileManager {
 
     @Override
     public boolean postPatientRecord(PatientRecord record) {
-        // Implementation for posting a patient record
         String folderName = "patient_directory";
         File folder = new File(folderName);
 
-        // Create folder if it doesn't exist
         if (!folder.exists()) {
             folder.mkdir();
         }
 
-        String filename = folderName + File.separator + record.getPatientId() + ".json";
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(JsonSerializer.toJson(record));
-            System.out.println("PatientRecord saved to " + filename);
-        } catch (IOException e) {
+        File target = new File(folder, record.getPatientId() + ".json");
+
+        try {
+            JsonSerializer.writeToFile(target, record);
+            System.out.println("PatientRecord saved to " + target.getAbsolutePath());
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     @Override
     public PatientRecord getPatientRecord(String patientId) {
-        // Implementation for getting a patient record
         File folder = new File("patient_directory");
         if (!folder.exists() || !folder.isDirectory()) {
             System.out.println("Directory not found.");
@@ -48,7 +44,9 @@ public class PatientFileManager implements IPatientFileManager {
         File target = new File(folder, patientId + ".json");
         if (target.exists()) {
             System.out.println("Found file: " + target.getName());
-            return JsonSerializer.fromJson(target, PatientRecord.class);
+
+            // UPDATED: use Gson readFromFile
+            return JsonSerializer.readFromFile(target, PatientRecord.class);
         } else {
             System.out.println("No file found for patientId: " + patientId);
             return null;
