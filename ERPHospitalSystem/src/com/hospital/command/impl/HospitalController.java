@@ -70,6 +70,14 @@ public class HospitalController implements IHospitalController {
         return true;
     }
 
+    public boolean isPatientInSystem(String patientId) {
+        PatientRecord record = null;
+        if (patientId != null && !patientId.isEmpty()) {
+            record = fileMgr.getPatientRecord(patientId);
+        }
+        return record != null;
+    }
+
     private static String nz(String s) {
         return (s == null) ? "" : s;
     }

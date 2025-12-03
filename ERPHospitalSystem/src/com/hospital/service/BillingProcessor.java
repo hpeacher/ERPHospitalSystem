@@ -1,6 +1,7 @@
 package com.hospital.service;
 
 import com.hospital.model.Invoice;
+import com.hospital.model.VisitRecord;
 import com.hospital.repository.IInvoiceFileManager;
 import com.hospital.repository.impl.InvoiceFileManager;
 
@@ -24,12 +25,11 @@ public class BillingProcessor {
         System.out.println("Invoice " + invoice.getId() + " has been processed");
     }
 
-    public Invoice generateInvoice(String patientId, String visitId, double amount, String insurance) {
+    public String generateInvoice(VisitRecord record, double amount, String insurance) {
         String newInvoiceId = "I" + getNextInvoiceIndex();
-        Invoice invoice = new Invoice(newInvoiceId, amount, patientId, visitId, insurance);
-        System.out.println("Invoice for patient: " + patientId + " generated with id "
-                + invoice.getId() + " at " + invoice.getCreatedAt());
-        return invoice;
+        Invoice invoice = new Invoice(newInvoiceId, amount, record.getPatientId(), record.getId(), insurance);
+        invoiceFileManager.postInvoice(invoice);
+        return invoice.getId();
     }
 
     public static synchronized int getNextInvoiceIndex() {

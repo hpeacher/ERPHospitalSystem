@@ -5,13 +5,16 @@ import com.hospital.repository.IPatientFileManager;
 
 public class DischargeManager {
     private IPatientFileManager patientFileManager;
+    private BillingProcessor billingProcessor;
     private Hospital hospital;
     private final NurseWorkflowService nurseWorkflow;
 
     public DischargeManager(Hospital hospital,
-            IPatientFileManager patientFileManager) {
+            IPatientFileManager patientFileManager,
+            BillingProcessor billingProcessor) {
         this.hospital = hospital;
         this.patientFileManager = patientFileManager;
+        this.billingProcessor = billingProcessor;
 
         ChecklistProcessor checklistProcessor = new ChecklistProcessor(this::checklistCompleted);
         this.nurseWorkflow = new NurseWorkflowService(hospital, checklistProcessor);
@@ -34,6 +37,10 @@ public class DischargeManager {
             return;
         }
 
+        VisitRecord visit = patientRecord.getMostRecentVisitRecord();
+        String invoiceId = billingProcessor.generateInvoice(visit,
+                Math.round(Math.random() * 1000), patientRecord.getInsurance());
+        visit.setInvoiceId(invoiceId);
         patientFileManager.postPatientRecord(patientRecord);
         System.out.println("Discharge summary generated for Patient ID: " + patientRecord.getPatientId());
     }

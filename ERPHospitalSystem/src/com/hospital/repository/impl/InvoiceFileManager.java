@@ -46,7 +46,7 @@ public class InvoiceFileManager implements IInvoiceFileManager {
         File target = new File(folder, invoiceId + ".json");
         if (target.exists()) {
             System.out.println("Found file: " + target.getName());
-            return JsonSerializer.fromJson(target, Invoice.class);
+            return JsonSerializer.readFromFile(target, Invoice.class);
         } else {
             System.out.println("No file found for invoiceId: " + invoiceId);
             return null;
