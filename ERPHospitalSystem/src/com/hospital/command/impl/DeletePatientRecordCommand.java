@@ -41,18 +41,20 @@ public class DeletePatientRecordCommand implements ICommand{
        switch (choice){
            case "1":
                confirmDeleteAdministrative(record);
+               fileManager.postPatientRecord(record);
                break;
            case "2":
                confirmDeleteMedical(record);
+               fileManager.postPatientRecord(record);
                break;
            case "3":
                handleDeleteVisitHistory(record);
+               fileManager.postPatientRecord(record);
                break;
            case "4":
                deleteFullRecord(patientId);
                break;
-           }  
-           fileManager.postPatientRecord(record);    
+           }      
        }
 
    private void deleteFullRecord(String patientId) {
@@ -93,6 +95,7 @@ public class DeletePatientRecordCommand implements ICommand{
                break;
           
            case "3":
+               record.deleteMostRecentVisit();
                System.out.println("Most recent visit deleted.");
                break;
            default:
