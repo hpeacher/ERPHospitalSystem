@@ -18,7 +18,7 @@ public class DeletePatientRecordCommand implements ICommand{
 
    @Override
    public String getToken() {
-       return "deletePatientRecord";
+       return "delete_Patient_Record";
    }
 
    @Override

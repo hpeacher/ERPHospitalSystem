@@ -26,7 +26,7 @@ public class ViewPatientRecordCommand implements ICommand{
 
    @Override
    public String getToken() {
-       return "viewPatientRecord";
+       return "view_Patient_Record";
    }
 
 
