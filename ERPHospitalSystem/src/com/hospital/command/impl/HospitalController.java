@@ -38,6 +38,14 @@ public class HospitalController implements IHospitalController {
                     newPid, nz(dto.name), nz(dto.dob), nz(dto.phone), nz(dto.address));
             PatientMedicalInfo med = new PatientMedicalInfo(newPid, "", "", "", "");
             record = new PatientRecord(newPid, admin, med, "Default insurance");
+            int nextVisitId = record.getVisits().size() + 1;
+
+            VisitRecord visit = new VisitRecord(record.getPatientId(), nextVisitId);
+            visit.setVitals("");
+            visit.setNotes(dto.reason);
+            visit.setDischargeChecklist(new DischargeChecklist());
+
+            record.addVisit(visit);
             fileMgr.postPatientRecord(record);
         }
 
