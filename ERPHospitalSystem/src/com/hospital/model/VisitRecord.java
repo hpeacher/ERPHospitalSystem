@@ -1,5 +1,8 @@
 package com.hospital.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VisitRecord {
     private int id;
     private String patientId;
@@ -9,6 +12,7 @@ public class VisitRecord {
     private String invoiceId;
     private Diagnosis diagnosis;
     private Integer visitIdCounter = 0;
+    private List<LabOrder> labOrders;
 
     private String followUpRecommendation;
 
@@ -19,10 +23,12 @@ public class VisitRecord {
         this.notes = null;
         this.dischargeChecklist = null;
         this.diagnosis = null;
+        this.labOrders = new ArrayList<>();
     }
     public VisitRecord() {
         this.vitals = "";
         this.notes = "";
+        this.labOrders = new ArrayList<>();
     }
 
 
@@ -39,6 +45,7 @@ public class VisitRecord {
         this.id = nextIdForThisPatient;
         this.vitals = "";
         this.notes = "";
+        this.labOrders = new ArrayList<>();
     }
 
     public int getId() {
@@ -91,5 +98,16 @@ public class VisitRecord {
 
     public void setDiagnosis(Diagnosis diagnosis) {
         this.diagnosis = diagnosis;
+    }
+
+    public List<LabOrder> getLabOrders() {
+        return labOrders;
+    }
+
+    public void addLabOrder(LabOrder labOrder) {
+        if (this.labOrders == null) {
+            this.labOrders = new ArrayList<>();
+        }
+        this.labOrders.add(labOrder);
     }
 }
