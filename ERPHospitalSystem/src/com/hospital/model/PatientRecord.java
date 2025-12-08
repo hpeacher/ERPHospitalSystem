@@ -93,4 +93,62 @@ public class PatientRecord {
     public String getMedicalHistory() {
         return "Retrieving medical history for: " + administrativeInfo.getName();
     }
+    public List<VisitRecord> getVisitHistory() {
+        return this.visits;
+    }
+    public void setVisits(ArrayList<VisitRecord> visits) {
+        this.visits = visits;
+    }
+
+    public PatientAdministrativeInfo getAdminInfo() {
+        return this.administrativeInfo;
+    }
+    public void setAdminInfo(PatientAdministrativeInfo adminInfo) {
+        this.administrativeInfo = adminInfo;
+    }
+    public PatientMedicalInfo getMedInfo() {
+        return this.medicalInfo;
+    }
+    public void setMedInfo(PatientMedicalInfo medInfo) {
+        this.medicalInfo = medInfo;
+    }
+
+    public void setVisitHistory(ArrayList<VisitRecord> visitHistory) {
+        this.visits = visitHistory;
+    }
+
+    public ArrayList<VisitRecord> getVisitRecords() {
+        return this.visits;
+    }
+
+    public VisitRecord getVisitRecord(int index) {
+        return this.visits.get(index - 1);
+    }
+
+    public void deleteVisitRecord(){
+        this.visits = new ArrayList<>();
+    }
+
+    public void printVisitHistory() {
+        if (visits.isEmpty()) {
+            System.out.println("No visits.");
+            return;
+        }
+
+        for (int i = 0; i < visits.size(); i++) {
+            System.out.println((i + 1) + ": " + visits.get(i));
+        }
+    }
+
+     public boolean deleteVisit(int index) {
+        if (index < 1 || index > visits.size()) return false;
+        visits.remove(index - 1);
+        return true;
+    }
+
+    public void deleteMostRecentVisit() {
+        if (!visits.isEmpty()) {
+            visits.remove(visits.size() - 1);
+        }
+    }
 }
