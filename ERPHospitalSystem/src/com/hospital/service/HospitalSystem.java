@@ -4,8 +4,10 @@ import com.hospital.command.NurseAssignmentStrategy;
 import com.hospital.command.impl.*;
 import com.hospital.model.*;
 import com.hospital.repository.IInvoiceFileManager;
+import com.hospital.repository.impl.InventoryRepository;
 import com.hospital.repository.impl.InvoiceFileManager;
 import com.hospital.repository.impl.PatientFileManager;
+import com.hospital.repository.impl.TransactionRepository;
 import java.util.Scanner;
 
 public class HospitalSystem {
@@ -45,10 +47,14 @@ public class HospitalSystem {
         NurseAssignmentStrategy nurseAssignmentStrategy = new LeastAssignedStrategy(system.hospital);
         HospitalController hospitalController = new HospitalController(system.hospital, nurseAssignmentStrategy);
         FollowUpAnalyzer analyzer = new FollowUpAnalyzer();
+        InventoryRepository inventoryRepository = new InventoryRepository(
+                "./ERPHospitalSystem/src/com/hospital/repository");
+        TransactionRepository transactionRepository = new TransactionRepository(
+                "./ERPHospitalSystem/src/com/hospital/repository");
+        InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository);
         Scanner sc = new Scanner(System.in);
 
         display.registerCommand(new AdmitPatientCommand(hospitalController, sc));
-        // display.registerCommand(new ScheduleAppointmentCommand());
         display.registerCommand(new ExitCommand(() -> system.stopRunning()));
         display.registerCommand(new HelpCommand(display));
         // display.registerCommand(new DiagnosisCommand());
@@ -62,6 +68,7 @@ public class HospitalSystem {
         display.registerCommand(new ManageDoctorsCommand(system.doctorManager, sc));
         display.registerCommand(new ViewEmployeesCommand(system.employeeViewer, sc));
         display.registerCommand(new ProcessInvoiceCommand(billingProcessor, sc, invoiceFileManager));
+        display.registerCommand(new InventoryCommand(sc, inventoryService));
         display.registerCommand(new DeletePatientRecordCommand(patientFileManager, sc));
         display.registerCommand(new ViewPatientRecordCommand(patientFileManager, sc));
 
