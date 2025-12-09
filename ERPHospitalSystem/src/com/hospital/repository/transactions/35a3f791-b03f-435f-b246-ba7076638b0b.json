@@ -1,0 +1,19 @@
+{
+  "transactionId": "35a3f791-b03f-435f-b246-ba7076638b0b",
+  "type": "WITHDRAWAL",
+  "medicationId": "MED001",
+  "quantity": 20,
+  "timestamp": {
+    "date": {
+      "year": 2025,
+      "month": 12,
+      "day": 1
+    },
+    "time": {
+      "hour": 13,
+      "minute": 4,
+      "second": 25,
+      "nano": 563624900
+    }
+  }
+}
