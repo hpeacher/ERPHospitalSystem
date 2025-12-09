@@ -27,5 +27,5 @@ hs_err_pid*
 replay_pid*
 /bin/
 
-#.DS_Store
+# DS_Store (Mac OS X)
 .DS_Store
