@@ -2,10 +2,12 @@ package com.hospital.command.impl;
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.Optional;
 
 import com.hospital.command.ICommand;
 import com.hospital.service.InventoryService;
 import com.hospital.model.MedicationStock;
+import com.hospital.repository.impl.InventoryRepository;
 
 public class InventoryCommand implements ICommand {
     private Scanner sc;
@@ -64,7 +66,18 @@ public class InventoryCommand implements ICommand {
     }
 
     private void orderMore() {
-        System.out.println("Will be finished in another branch");
+        System.out.println("Enter medication id you'd like to order: ");
+        String id = sc.nextLine().trim();
+        System.out.println("Enter quantity: ");
+        int quantity = sc.nextInt();
+        sc.nextLine();
+        
+        try {
+            invService.updateStock(id, quantity);
+            System.out.println("Successfully ordered " + quantity + " of medicine " + id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void withdrawFromInventory() {

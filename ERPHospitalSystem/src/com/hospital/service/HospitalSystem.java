@@ -6,6 +6,7 @@ import com.hospital.model.*;
 import com.hospital.repository.IInvoiceFileManager;
 import com.hospital.repository.impl.InventoryRepository;
 import com.hospital.repository.impl.InvoiceFileManager;
+import com.hospital.repository.impl.MedicationOrderRepository;
 import com.hospital.repository.impl.PatientFileManager;
 import com.hospital.repository.impl.TransactionRepository;
 import java.util.Scanner;
@@ -51,7 +52,9 @@ public class HospitalSystem {
                 "./ERPHospitalSystem/src/com/hospital/repository");
         TransactionRepository transactionRepository = new TransactionRepository(
                 "./ERPHospitalSystem/src/com/hospital/repository");
-        InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository);
+        MedicationOrderRepository orderRepository = new MedicationOrderRepository(
+                "./ERPHospitalSystem/src/com/hospital/repository");
+        InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository, orderRepository);
         Scanner sc = new Scanner(System.in);
 
         display.registerCommand(new AdmitPatientCommand(hospitalController, sc));

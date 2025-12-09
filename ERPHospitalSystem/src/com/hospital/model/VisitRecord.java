@@ -36,7 +36,7 @@ public class VisitRecord {
 
     public VisitRecord(String patientId, int nextIdForThisPatient) {
         this.patientId = patientId;
-        this.id = "V" + nextIdForThisPatient;
+        this.id =  nextIdForThisPatient;
         this.vitals = "";
         this.notes = "";
     }
@@ -45,9 +45,9 @@ public class VisitRecord {
         return id;
     }
 
-    public void setId(String id) {
+     public void setId(int id) {
         this.id = id;
-    }
+    } 
 
     public String getPatientId() {
         return patientId;
