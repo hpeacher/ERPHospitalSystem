@@ -52,6 +52,7 @@ public class HospitalSystem {
                 "./ERPHospitalSystem/src/com/hospital/repository");
         TransactionRepository transactionRepository = new TransactionRepository(
                 "./ERPHospitalSystem/src/com/hospital/repository");
+        InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository);
         IncidentReportRepository incidentRepo = new IncidentReportRepository("incident_reports");
         IncidentReportService incidentService = new IncidentReportService(incidentRepo, patientFileManager);
         IncidentReportController incidentController = new IncidentReportController(incidentService);
