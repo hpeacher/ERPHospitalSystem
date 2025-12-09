@@ -1,0 +1,122 @@
+{
+  "patientId": "P001",
+  "administrativeInfo": {
+    "patientId": "P001",
+    "name": "Jane Doe",
+    "dateOfBirth": "1",
+    "phoneNumber": "1",
+    "address": "1"
+  },
+  "medicalInfo": {
+    "patientId": "P001",
+    "gender": "",
+    "bloodType": "",
+    "height": "",
+    "weight": ""
+  },
+  "visits": [
+    {
+      "id": 1,
+      "patientId": "P001",
+      "vitals": "",
+      "notes": "1",
+      "dischargeChecklist": {
+        "finalized": false,
+        "notesCompleted": false,
+        "signature": null
+      },
+      "invoiceId": null,
+      "diagnosis": null,
+      "visitIdCounter": 0,
+      "followUpRecommendation": null
+    },
+    {
+      "id": 2,
+      "patientId": "P001",
+      "vitals": "",
+      "notes": "1",
+      "dischargeChecklist": {
+        "finalized": false,
+        "notesCompleted": false,
+        "signature": null
+      },
+      "invoiceId": null,
+      "diagnosis": null,
+      "visitIdCounter": 0,
+      "followUpRecommendation": "Recommend routine follow-up in 2 weeks."
+    }
+  ],
+  "insurance": "Default insurance",
+  "appointments": [
+    {
+      "appointmentId": "APT-2",
+      "patientId": "P001",
+      "doctorName": "Dr Smith",
+      "date": "1",
+      "time": "2"
+    },
+    {
+      "appointmentId": "APT-2",
+      "patientId": "P001",
+      "doctorName": "Dr. smith",
+      "date": "2001",
+      "time": "12"
+    },
+    {
+      "appointmentId": "APT-3",
+      "patientId": "P001",
+      "doctorName": "Dr.Smith",
+      "date": "12",
+      "time": "12"
+    },
+    {
+      "appointmentId": "APT-4",
+      "patientId": "P001",
+      "doctorName": "Dr. Smith",
+      "date": "",
+      "time": ""
+    },
+    {
+      "appointmentId": "APT-5",
+      "patientId": "P001",
+      "doctorName": "Dr. Smith",
+      "date": "1",
+      "time": "1"
+    },
+    {
+      "appointmentId": "APT-6",
+      "patientId": "P001",
+      "doctorName": "Dr. Smith",
+      "date": "2000",
+      "time": "12:00"
+    },
+    {
+      "appointmentId": "APT-7",
+      "patientId": "P001",
+      "doctorName": "Dr. Johnson",
+      "date": "1",
+      "time": "4"
+    },
+    {
+      "appointmentId": "APT-8",
+      "patientId": "P001",
+      "doctorName": "Dr. Johnson",
+      "date": "12",
+      "time": "123"
+    },
+    {
+      "appointmentId": "APT-9",
+      "patientId": "P001",
+      "doctorName": "Dr. Johnson",
+      "date": "2026",
+      "time": "1"
+    },
+    {
+      "appointmentId": "APT-10",
+      "patientId": "P001",
+      "doctorName": "Dr. Smith",
+      "date": "1234",
+      "time": "1234"
+    }
+  ]
+}
