@@ -1,6 +1,7 @@
 package com.hospital.repository.impl;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import com.hospital.model.PatientRecord;
 import com.hospital.repository.IPatientFileManager;
@@ -75,5 +76,32 @@ public class PatientFileManager implements IPatientFileManager {
             return false;
         }
         return true;
+    }
+    public static ArrayList<PatientRecord> getAllPatientRecords() {
+        ArrayList<PatientRecord> records = new ArrayList<>();
+
+        File folder = new File("patient_directory");
+        if (!folder.exists() || !folder.isDirectory()) {
+            System.out.println("Directory not found.");
+            return records; // return empty list
+        }
+
+        File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
+        if (files == null) {
+            return records;
+        }
+
+        for (File file : files) {
+            try {
+                PatientRecord record = JsonSerializer.readFromFile(file, PatientRecord.class);
+                if (record != null) {
+                    records.add(record);
+                }
+            } catch (Exception e) {
+                System.out.println("Failed to read file: " + file.getName());
+            }
+        }
+
+        return records;
     }
 }
