@@ -5,8 +5,10 @@ import com.hospital.command.impl.*;
 import com.hospital.model.*;
 import com.hospital.repository.IInvoiceFileManager;
 import com.hospital.repository.impl.IncidentReportRepository;
+import com.hospital.repository.ILabOrderRepository;
 import com.hospital.repository.impl.InventoryRepository;
 import com.hospital.repository.impl.InvoiceFileManager;
+import com.hospital.repository.impl.LabOrderRepository;
 import com.hospital.repository.impl.PatientFileManager;
 import com.hospital.repository.impl.TransactionRepository;
 import java.util.Scanner;
@@ -42,6 +44,8 @@ public class HospitalSystem {
         IInvoiceFileManager invoiceFileManager = new InvoiceFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
         AppointmentScheduler appointmentScheduler = new AppointmentScheduler(patientFileManager);
+        ILabOrderRepository labOrderRepository = new LabOrderRepository();
+        ILabOrderService labOrderService = new LabOrderService(labOrderRepository, patientFileManager);
         system.dischargeManager = new DischargeManager(system.hospital, patientFileManager, billingProcessor);
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);
         DisplayContainer display = new DisplayContainer();
@@ -56,6 +60,8 @@ public class HospitalSystem {
         IncidentReportRepository incidentRepo = new IncidentReportRepository("incident_reports");
         IncidentReportService incidentService = new IncidentReportService(incidentRepo, patientFileManager);
         IncidentReportController incidentController = new IncidentReportController(incidentService);
+        UtilizationReportService utilizationReportService =
+                new UtilizationReportService(system.getHospital(), system.doctorManager);
         Scanner sc = new Scanner(System.in);
 
         display.registerCommand(new AdmitPatientCommand(hospitalController, sc));
@@ -76,6 +82,13 @@ public class HospitalSystem {
         display.registerCommand(new DeletePatientRecordCommand(patientFileManager, sc));
         display.registerCommand(new ViewPatientRecordCommand(patientFileManager, sc));
         display.registerCommand(new CreateIncidentReportCommand(incidentController, sc));
+        display.registerCommand(
+                new UtilizationReportCommand(
+                        utilizationReportService,
+                        patientFileManager, sc
+                )
+        );
+        display.registerCommand(new ProcessLabOrderCommand(labOrderService, sc));
 
         /*
          * Main loop that utilizes the display container to allow user commands.
