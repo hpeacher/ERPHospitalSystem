@@ -4,8 +4,10 @@ import com.hospital.command.NurseAssignmentStrategy;
 import com.hospital.command.impl.*;
 import com.hospital.model.*;
 import com.hospital.repository.IInvoiceFileManager;
+import com.hospital.repository.ILabOrderRepository;
 import com.hospital.repository.impl.InventoryRepository;
 import com.hospital.repository.impl.InvoiceFileManager;
+import com.hospital.repository.impl.LabOrderRepository;
 import com.hospital.repository.impl.PatientFileManager;
 import com.hospital.repository.impl.TransactionRepository;
 import java.util.Scanner;
@@ -41,6 +43,8 @@ public class HospitalSystem {
         IInvoiceFileManager invoiceFileManager = new InvoiceFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
         AppointmentScheduler appointmentScheduler = new AppointmentScheduler(patientFileManager);
+        ILabOrderRepository labOrderRepository = new LabOrderRepository();
+        ILabOrderService labOrderService = new LabOrderService(labOrderRepository, patientFileManager);
         system.dischargeManager = new DischargeManager(system.hospital, patientFileManager, billingProcessor);
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);
         DisplayContainer display = new DisplayContainer();
@@ -71,6 +75,7 @@ public class HospitalSystem {
         display.registerCommand(new InventoryCommand(sc, inventoryService));
         display.registerCommand(new DeletePatientRecordCommand(patientFileManager, sc));
         display.registerCommand(new ViewPatientRecordCommand(patientFileManager, sc));
+        display.registerCommand(new ProcessLabOrderCommand(labOrderService, sc));
 
         /*
          * Main loop that utilizes the display container to allow user commands.
