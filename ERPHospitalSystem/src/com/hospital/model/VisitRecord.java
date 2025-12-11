@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VisitRecord {
-    private int id;
+    private String id;
     private String patientId;
     private String vitals;
     private String notes;
@@ -17,7 +17,7 @@ public class VisitRecord {
     private String followUpRecommendation;
 
     public VisitRecord(String patientId) {
-        this.id = ++ visitIdCounter;
+        this.id = "V" + ++visitIdCounter;
         this.patientId = patientId;
         this.vitals = null;
         this.notes = null;
@@ -42,19 +42,19 @@ public class VisitRecord {
 
     public VisitRecord(String patientId, int nextIdForThisPatient) {
         this.patientId = patientId;
-        this.id = "V" + nextIdForThisPatient;
+        this.id =  "V" + nextIdForThisPatient;
         this.vitals = "";
         this.notes = "";
         this.labOrders = new ArrayList<>();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+     public void setId(String id) {
         this.id = id;
-    }
+    } 
 
     public String getPatientId() {
         return patientId;
