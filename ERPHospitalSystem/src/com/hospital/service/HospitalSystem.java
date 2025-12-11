@@ -4,6 +4,7 @@ import com.hospital.command.NurseAssignmentStrategy;
 import com.hospital.command.impl.*;
 import com.hospital.model.*;
 import com.hospital.repository.IInvoiceFileManager;
+import com.hospital.repository.impl.IncidentReportRepository;
 import com.hospital.repository.ILabOrderRepository;
 import com.hospital.repository.impl.InventoryRepository;
 import com.hospital.repository.impl.InvoiceFileManager;
@@ -56,6 +57,9 @@ public class HospitalSystem {
                 "./ERPHospitalSystem/src/com/hospital/repository");
         TransactionRepository transactionRepository = new TransactionRepository(
                 "./ERPHospitalSystem/src/com/hospital/repository");
+        IncidentReportRepository incidentRepo = new IncidentReportRepository("incident_reports");
+        IncidentReportService incidentService = new IncidentReportService(incidentRepo, patientFileManager);
+        IncidentReportController incidentController = new IncidentReportController(incidentService);
         MedicationOrderRepository orderRepository = new MedicationOrderRepository(
                 "./ERPHospitalSystem/src/com/hospital/repository");
         InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository, orderRepository);
@@ -80,6 +84,7 @@ public class HospitalSystem {
         display.registerCommand(new InventoryCommand(sc, inventoryService));
         display.registerCommand(new DeletePatientRecordCommand(patientFileManager, sc));
         display.registerCommand(new ViewPatientRecordCommand(patientFileManager, sc));
+        display.registerCommand(new CreateIncidentReportCommand(incidentController, sc));
         display.registerCommand(
                 new UtilizationReportCommand(
                         utilizationReportService,
