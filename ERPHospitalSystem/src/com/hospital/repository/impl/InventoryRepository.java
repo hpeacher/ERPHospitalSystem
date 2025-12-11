@@ -26,7 +26,7 @@ public class InventoryRepository {
     public Optional<MedicationStock> findByMedicationId(String medicationId) {
         
         File file = new File(inventoryDir, medicationId + ".json");
-
+       
         if (!file.exists())
             return Optional.empty();
         return Optional.of(JsonSerializer.readFromFile(file, MedicationStock.class));

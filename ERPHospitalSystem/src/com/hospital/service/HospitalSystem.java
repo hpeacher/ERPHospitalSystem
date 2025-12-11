@@ -53,11 +53,11 @@ public class HospitalSystem {
         HospitalController hospitalController = new HospitalController(system.hospital, nurseAssignmentStrategy);
         FollowUpAnalyzer analyzer = new FollowUpAnalyzer();
         InventoryRepository inventoryRepository = new InventoryRepository(
-                "./ERPHospitalSystem/src/com/hospital/repository");
+                "./src/com/hospital/repository");
         TransactionRepository transactionRepository = new TransactionRepository(
-                "./ERPHospitalSystem/src/com/hospital/repository");
+                "./src/com/hospital/repository");
         MedicationOrderRepository orderRepository = new MedicationOrderRepository(
-                "./ERPHospitalSystem/src/com/hospital/repository");
+                "./src/com/hospital/repository");
         InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository, orderRepository);
         UtilizationReportService utilizationReportService =
                 new UtilizationReportService(system.getHospital(), system.doctorManager);
