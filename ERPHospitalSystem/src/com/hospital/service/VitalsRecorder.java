@@ -13,7 +13,7 @@ public class VitalsRecorder {
         // Implementation for recording vitals
         VisitRecord visit = patientRecord.getMostRecentVisitRecord();
         if (visit == null) {
-            visit = new VisitRecord(patientRecord.getPatientId());
+            visit = new VisitRecord(patientRecord.getPatientId(), patientRecord.getVisitsSize() + 1);
         }
 
         visit.setVitals("Sample Vitals Data for Patient ID: " + patientRecord.getPatientId());
