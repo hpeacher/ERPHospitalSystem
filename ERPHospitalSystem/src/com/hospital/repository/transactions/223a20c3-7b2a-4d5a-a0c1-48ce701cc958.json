@@ -1,0 +1,6 @@
+{
+  "transactionId": "223a20c3-7b2a-4d5a-a0c1-48ce701cc958",
+  "type": "RESTOCK",
+  "medicationId": "MED001",
+  "quantity": 5
+}

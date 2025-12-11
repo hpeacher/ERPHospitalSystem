@@ -5,6 +5,13 @@
       "name": "HospitalSystem",
       "request": "launch",
       "mainClass": "com.hospital.service.HospitalSystem",
+      "projectName": "ERPHospitalSystem_647cbd5f"
+    },
+    {
+      "type": "java",
+      "name": "HospitalSystem",
+      "request": "launch",
+      "mainClass": "com.hospital.service.HospitalSystem",
       "projectName": "ERPHospitalSystem_3db8a623"
     },
     {
