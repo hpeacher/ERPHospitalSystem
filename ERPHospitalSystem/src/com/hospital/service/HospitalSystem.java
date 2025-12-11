@@ -8,6 +8,7 @@ import com.hospital.repository.impl.IncidentReportRepository;
 import com.hospital.repository.ILabOrderRepository;
 import com.hospital.repository.impl.InventoryRepository;
 import com.hospital.repository.impl.InvoiceFileManager;
+import com.hospital.repository.impl.MedicationOrderRepository;
 import com.hospital.repository.impl.LabOrderRepository;
 import com.hospital.repository.impl.PatientFileManager;
 import com.hospital.repository.impl.TransactionRepository;
@@ -56,10 +57,12 @@ public class HospitalSystem {
                 "./ERPHospitalSystem/src/com/hospital/repository");
         TransactionRepository transactionRepository = new TransactionRepository(
                 "./ERPHospitalSystem/src/com/hospital/repository");
-        InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository);
         IncidentReportRepository incidentRepo = new IncidentReportRepository("incident_reports");
         IncidentReportService incidentService = new IncidentReportService(incidentRepo, patientFileManager);
         IncidentReportController incidentController = new IncidentReportController(incidentService);
+        MedicationOrderRepository orderRepository = new MedicationOrderRepository(
+                "./ERPHospitalSystem/src/com/hospital/repository");
+        InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository, orderRepository);
         UtilizationReportService utilizationReportService =
                 new UtilizationReportService(system.getHospital(), system.doctorManager);
         Scanner sc = new Scanner(System.in);

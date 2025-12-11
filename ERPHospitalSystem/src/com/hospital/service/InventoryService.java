@@ -2,6 +2,7 @@ package com.hospital.service;
 
 import com.hospital.model.*;
 import com.hospital.repository.impl.InventoryRepository;
+import com.hospital.repository.impl.MedicationOrderRepository;
 import com.hospital.repository.impl.TransactionRepository;
 
 import java.util.List;
@@ -11,11 +12,13 @@ public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
     private final TransactionRepository transactionRepository;
+    private final MedicationOrderRepository medicationOrderRepository;
 
     public InventoryService(InventoryRepository inventoryRepository,
-            TransactionRepository transactionRepository) {
+            TransactionRepository transactionRepository, MedicationOrderRepository medicationOrderRepository) {
         this.inventoryRepository = inventoryRepository;
         this.transactionRepository = transactionRepository;
+        this.medicationOrderRepository = medicationOrderRepository;
     }
 
     public List<MedicationStock> viewInventory() {
@@ -50,10 +53,16 @@ public class InventoryService {
         if (stockOpt.isEmpty()) {
             throw new IllegalArgumentException("Medication not found in inventory.");
         }
+        if (!isBelowThreshold(medicationId)) {
+            throw new IllegalArgumentException("Reorder threshold not reached.");
+        }
 
         MedicationStock stock = stockOpt.get();
         stock.setQuantityAvailable(stock.getQuantityAvailable() + quantityAdded);
         inventoryRepository.save(stock);
+
+        MedicationOrder order = new MedicationOrder(medicationId, quantityAdded);
+        medicationOrderRepository.save(order);
 
         Transaction tx = new Transaction("RESTOCK", medicationId, quantityAdded);
         transactionRepository.save(tx);

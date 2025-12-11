@@ -24,6 +24,7 @@ public class ChecklistProcessor {
         if (checklist != null) {
             checklist.setNotesCompleted(true);
             checklist.setSignature(signature);
+            checklist.setFinalized(true);
             patientRecord.updateMostRecentVisitRecord(visitRecord);
             onChecklistCompleted.accept(patientRecord);
             return true;

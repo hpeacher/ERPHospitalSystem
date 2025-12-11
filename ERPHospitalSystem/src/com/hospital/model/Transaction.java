@@ -8,7 +8,7 @@ public class Transaction {
     private String type; // e.g., "WITHDRAWAL", "RESTOCK"
     private String medicationId;
     private int quantity;
-    private LocalDateTime timestamp;
+ //   private LocalDateTime timestamp;
 
     public Transaction() {
     }
@@ -18,7 +18,7 @@ public class Transaction {
         this.type = type;
         this.medicationId = medicationId;
         this.quantity = quantity;
-        this.timestamp = LocalDateTime.now();
+   //     this.timestamp = LocalDateTime.now();
     }
 
     // Getters and Setters
@@ -54,13 +54,13 @@ public class Transaction {
         this.quantity = quantity;
     }
 
-    public LocalDateTime getTimestamp() {
+/*    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -69,7 +69,7 @@ public class Transaction {
                 ", type='" + type + '\'' +
                 ", medicationId='" + medicationId + '\'' +
                 ", quantity=" + quantity +
-                ", timestamp=" + timestamp +
+   //             ", timestamp=" + timestamp +
                 '}';
     }
 }

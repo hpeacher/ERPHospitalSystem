@@ -7,12 +7,12 @@ public class Invoice {
     private String id;
     private double cost;
     private String patientId;
-    private int visitId;
+    private String visitId;
     private String insurance;
     private String createdAt;
     private String finalizedAt;
 
-    public Invoice(String id, double cost, String patientId, int visitId, String insurance) {
+    public Invoice(String id, double cost, String patientId, String visitId, String insurance) {
         this.id = id;
         this.cost = cost;
         this.patientId = patientId;
@@ -48,11 +48,11 @@ public class Invoice {
         this.patientId = patientId;
     }
 
-    public int getVisitId() {
+    public String getVisitId() {
         return visitId;
     }
 
-    public void setVisitId(int visitId) {
+    public void setVisitId(String visitId) {
         this.visitId = visitId;
     }
 
