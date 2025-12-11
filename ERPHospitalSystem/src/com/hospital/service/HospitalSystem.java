@@ -59,6 +59,8 @@ public class HospitalSystem {
         MedicationOrderRepository orderRepository = new MedicationOrderRepository(
                 "./ERPHospitalSystem/src/com/hospital/repository");
         InventoryService inventoryService = new InventoryService(inventoryRepository, transactionRepository, orderRepository);
+        UtilizationReportService utilizationReportService =
+                new UtilizationReportService(system.getHospital(), system.doctorManager);
         Scanner sc = new Scanner(System.in);
 
         display.registerCommand(new AdmitPatientCommand(hospitalController, sc));
@@ -78,6 +80,12 @@ public class HospitalSystem {
         display.registerCommand(new InventoryCommand(sc, inventoryService));
         display.registerCommand(new DeletePatientRecordCommand(patientFileManager, sc));
         display.registerCommand(new ViewPatientRecordCommand(patientFileManager, sc));
+        display.registerCommand(
+                new UtilizationReportCommand(
+                        utilizationReportService,
+                        patientFileManager, sc
+                )
+        );
         display.registerCommand(new ProcessLabOrderCommand(labOrderService, sc));
 
         /*
