@@ -93,9 +93,11 @@ public class PatientRecord {
     public String getMedicalHistory() {
         return "Retrieving medical history for: " + administrativeInfo.getName();
     }
+
     public List<VisitRecord> getVisitHistory() {
         return this.visits;
     }
+
     public void setVisits(ArrayList<VisitRecord> visits) {
         this.visits = visits;
     }
@@ -103,12 +105,15 @@ public class PatientRecord {
     public PatientAdministrativeInfo getAdminInfo() {
         return this.administrativeInfo;
     }
+
     public void setAdminInfo(PatientAdministrativeInfo adminInfo) {
         this.administrativeInfo = adminInfo;
     }
+
     public PatientMedicalInfo getMedInfo() {
         return this.medicalInfo;
     }
+
     public void setMedInfo(PatientMedicalInfo medInfo) {
         this.medicalInfo = medInfo;
     }
@@ -125,7 +130,7 @@ public class PatientRecord {
         return this.visits.get(index - 1);
     }
 
-    public void deleteVisitRecord(){
+    public void deleteVisitRecord() {
         this.visits = new ArrayList<>();
     }
 
@@ -140,8 +145,9 @@ public class PatientRecord {
         }
     }
 
-     public boolean deleteVisit(int index) {
-        if (index < 1 || index > visits.size()) return false;
+    public boolean deleteVisit(int index) {
+        if (index < 1 || index > visits.size())
+            return false;
         visits.remove(index - 1);
         return true;
     }
@@ -150,5 +156,9 @@ public class PatientRecord {
         if (!visits.isEmpty()) {
             visits.remove(visits.size() - 1);
         }
+    }
+
+    public int getVisitsSize() {
+        return visits.size();
     }
 }

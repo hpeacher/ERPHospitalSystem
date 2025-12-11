@@ -13,9 +13,16 @@ public class VisitRecord {
     private Diagnosis diagnosis;
     private Integer visitIdCounter = 0;
     private List<LabOrder> labOrders;
-
     private String followUpRecommendation;
 
+    public VisitRecord(String patientId, int nextIdForThisPatient) {
+        this.patientId = patientId;
+        this.id = "V" + nextIdForThisPatient;
+        this.vitals = "";
+        this.notes = "";
+        this.labOrders = new ArrayList<>();
+    }  
+  
     public VisitRecord(String patientId) {
         this.id = "V" + ++visitIdCounter;
         this.patientId = patientId;
@@ -25,12 +32,12 @@ public class VisitRecord {
         this.diagnosis = null;
         this.labOrders = new ArrayList<>();
     }
+  
     public VisitRecord() {
         this.vitals = "";
         this.notes = "";
         this.labOrders = new ArrayList<>();
     }
-
 
     public String getFollowUpRecommendation() {
         return followUpRecommendation;
@@ -40,15 +47,7 @@ public class VisitRecord {
         this.followUpRecommendation = recommendation;
     }
 
-    public VisitRecord(String patientId, int nextIdForThisPatient) {
-        this.patientId = patientId;
-        this.id =  "V" + nextIdForThisPatient;
-        this.vitals = "";
-        this.notes = "";
-        this.labOrders = new ArrayList<>();
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
