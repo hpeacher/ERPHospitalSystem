@@ -47,7 +47,7 @@ public class VisitRecord {
         this.followUpRecommendation = recommendation;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
