@@ -44,7 +44,7 @@ public class HospitalSystem {
         IInvoiceFileManager invoiceFileManager = new InvoiceFileManager();
         BillingProcessor billingProcessor = new BillingProcessor();
         AppointmentScheduler appointmentScheduler = new AppointmentScheduler(patientFileManager);
-        ILabOrderRepository labOrderRepository = new LabOrderRepository();
+        ILabOrderRepository labOrderRepository = new LabOrderRepository("lab_orders.json");
         ILabOrderService labOrderService = new LabOrderService(labOrderRepository, patientFileManager);
         system.dischargeManager = new DischargeManager(system.hospital, patientFileManager, billingProcessor);
         System.out.println("Hospital System initialized with capacity: " + DEFAULT_CAPACITY);

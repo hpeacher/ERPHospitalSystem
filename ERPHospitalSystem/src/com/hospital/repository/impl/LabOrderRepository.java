@@ -2,6 +2,10 @@ package com.hospital.repository.impl;
 
 import com.hospital.model.LabOrder;
 import com.hospital.repository.ILabOrderRepository;
+import com.hospital.repository.JsonSerializer;
+import com.google.gson.reflect.TypeToken;
+import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,9 +13,42 @@ import java.util.stream.Collectors;
 public class LabOrderRepository implements ILabOrderRepository {
     private List<LabOrder> orders;
     private static int orderIdCounter = 0;
+    private final File storageFile;
+    private final Type listType = new TypeToken<List<LabOrder>>() {}.getType();
 
-    public LabOrderRepository() {
-        this.orders = new ArrayList<>();
+    public LabOrderRepository(String filePath) {
+        this.storageFile = new File(filePath);
+        this.orders = loadAll();
+        initializeOrderIdCounter();
+    }
+
+    private List<LabOrder> loadAll() {
+        if (!storageFile.exists()) {
+            return new ArrayList<>();
+        }
+        return JsonSerializer.readListFromFile(storageFile, listType);
+    }
+
+    private void saveAll() {
+        JsonSerializer.writeToFile(storageFile, orders);
+    }
+
+    private void initializeOrderIdCounter() {
+        int maxId = 0;
+        for (LabOrder order : orders) {
+            String orderId = order.getOrderId();
+            if (orderId != null && orderId.startsWith("LO")) {
+                try {
+                    int id = Integer.parseInt(orderId.substring(2));
+                    if (id > maxId) {
+                        maxId = id;
+                    }
+                } catch (NumberFormatException e) {
+                    // Ignore malformed IDs
+                }
+            }
+        }
+        orderIdCounter = maxId;
     }
 
     @Override
@@ -20,6 +57,7 @@ public class LabOrderRepository implements ILabOrderRepository {
             order.setOrderId("LO" + (++orderIdCounter));
         }
         orders.add(order);
+        saveAll();
     }
 
     @Override
@@ -27,6 +65,7 @@ public class LabOrderRepository implements ILabOrderRepository {
         for (int i = 0; i < orders.size(); i++) {
             if (orders.get(i).getOrderId().equals(order.getOrderId())) {
                 orders.set(i, order);
+                saveAll();
                 return;
             }
         }
